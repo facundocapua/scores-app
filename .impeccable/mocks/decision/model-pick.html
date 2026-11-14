@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<title>Porotos · Baraja</title>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<style>
+:root{--ground:#22396F;--card:#FBF8F1;--ink:#1A1A1A;--copas:#C8312B;--oros:#D99A1E;--espadas:#2B4C9B;--bastos:#3E7D3A}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:var(--ground);color:var(--card);font-family:-apple-system,system-ui,sans-serif}
+body{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 14px),repeating-linear-gradient(-45deg,rgba(255,255,255,.05) 0 2px,transparent 2px 14px)}
+.status{height:47px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 32px 8px;font-weight:600;font-size:16px}
+.nav{height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 16px}
+.nav a{color:#F3D58A;font-size:17px;text-decoration:none}.nav a:last-child{justify-self:end}
+.nav b{font-size:17px;font-weight:600}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:18px 16px 0}
+.card{position:relative;height:500px;background:var(--card);border-radius:16px;color:var(--ink);box-shadow:0 8px 24px rgba(0,0,0,.28);border:3px solid var(--card);outline:1.5px solid currentColor;outline-offset:-9px;padding:18px 14px}
+.card.copas{color:var(--copas)}.card.oros{color:var(--oros)}
+.idx{position:absolute;font-family:"Alfa Slab One",serif;font-size:44px;line-height:1}
+.idx.tl{top:20px;left:18px}.idx.br{bottom:20px;right:18px;transform:rotate(180deg)}
+.suit{position:absolute;top:76px;left:18px;width:30px;height:30px}
+.name{position:absolute;top:118px;left:0;right:0;text-align:center;font-family:"Alfa Slab One",serif;font-size:26px;color:var(--ink)}
+.sticks{position:absolute;top:168px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+.sticks svg{width:46px;height:46px}
+.sticks line{stroke:currentColor;stroke-width:4;stroke-linecap:round}
+.half{font-size:12px;color:#6b6457;text-transform:uppercase;letter-spacing:.05em}
+.rule{width:70%;height:2px;background:currentColor;margin:4px 0}
+.actions{position:absolute;top:648px;left:16px;right:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn{height:60px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:"Alfa Slab One",serif;font-size:26px;color:#fff}
+.btn.copas{background:var(--copas)}.btn.oros{background:var(--oros);color:#2a1c00}
+.end{position:absolute;top:770px;left:0;right:0;text-align:center;color:#F3D58A;font-size:15px}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;background:#fff;border-radius:3px}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="g5" viewBox="0 0 52 52"><line x1="8" y1="8" x2="44" y2="8"/><line x1="44" y1="8" x2="44" y2="44"/><line x1="44" y1="44" x2="8" y2="44"/><line x1="8" y1="44" x2="8" y2="8"/><line x1="10" y1="42" x2="42" y2="10"/></symbol>
+<symbol id="g3" viewBox="0 0 52 52"><line x1="8" y1="8" x2="44" y2="8"/><line x1="44" y1="8" x2="44" y2="44"/><line x1="44" y1="44" x2="8" y2="44"/></symbol>
+<symbol id="g1" viewBox="0 0 52 52"><line x1="8" y1="8" x2="44" y2="8"/></symbol>
+</defs></svg>
+<div class="status"><span>21:47</span><span>●●● 82%</span></div>
+<nav class="nav"><a href="#">‹ Partidas</a><b>Truco a 30</b><a href="#">Deshacer</a></nav>
+<section class="cards">
+  <article class="card copas">
+    <div class="idx tl">18</div>
+    <svg class="suit" viewBox="0 0 30 30"><path d="M5 4h20c0 8-4 12-10 12S5 12 5 4z M13 16h4v7h-4z M8 26h14v2H8z" fill="currentColor"/></svg>
+    <div class="name">Nosotros</div>
+    <div class="sticks"><span class="half">Malas</span><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg><div class="rule"></div><span class="half">Buenas</span><svg><use href="#g3"/></svg></div>
+    <div class="idx br">18</div>
+  </article>
+  <article class="card oros">
+    <div class="idx tl">11</div>
+    <svg class="suit" viewBox="0 0 30 30"><circle cx="15" cy="15" r="12" fill="currentColor"/><circle cx="15" cy="15" r="6" fill="none" stroke="#FBF8F1" stroke-width="2"/></svg>
+    <div class="name">Ellos</div>
+    <div class="sticks"><span class="half">Malas</span><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg><svg><use href="#g1"/></svg><div class="rule"></div><span class="half">Buenas</span></div>
+    <div class="idx br">11</div>
+  </article>
+</section>
+<div class="actions"><div class="btn copas">+1</div><div class="btn oros">+1</div></div>
+<div class="end">Terminar partida</div>
+<div class="home"></div>
+</body></html>

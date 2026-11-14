@@ -1,0 +1,403 @@
+<!doctype html>
+<!--
+  PROTOTIPO DESCARTABLE: ticket "Identidad visual con impeccable" (scores-app #3).
+  Pregunta: ¿cómo se ve Porotos? Shell común + un mundo visual propio por Juego.
+  Pantallas switcheables con ?screen= (inicio, truco, generala, burako-a, burako-b, burako-c, icono)
+  usando la barra flotante o las flechas ← →. Estado en memoria, sin persistencia.
+  Es HTML que representa una app SwiftUI: los controles imitan los nativos de iOS.
+-->
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Porotos · prototipo de identidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Bevan&family=Abril+Fatface&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Shell / marca */
+  --brand:#8E2A23;      /* poroto colorado */
+  --brand-ink:#FFF6EE;
+  --bg:#F2F2F7; --card:#FFFFFF; --label:#111; --sec:#6C6C70; --sep:#D1D1D6;
+  /* Truco: fósforos de noche */
+  --tr-ground:#17120F; --tr-ground2:#221A15; --tr-wood:#E8CF9C; --tr-wood-dk:#B99560; --tr-head:#C23B22; --tr-head-dk:#7A1E12; --tr-ink:#F3E9D8; --tr-dim:#A8998A; --tr-accent:#F2B33D;
+  /* Generala: paño de casino */
+  --ge-felt:#0D5A3B; --ge-felt-dk:#083D28; --ge-brass:#D8B45A; --ge-ink:#F4F0E2; --ge-dim:#A9C7B5; --ge-red:#E05A4F;
+  /* Burako: fichas sobre mesa */
+  --bu-ground:#123B40; --bu-ground2:#0C2C30; --bu-tile:#F7F2E6; --bu-tile-edge:#D9CFB8; --bu-red:#C62828; --bu-blue:#1E5BB8; --bu-black:#1F1F1F; --bu-yellow:#D9930D; --bu-ink:#EAF2F0; --bu-dim:#9DB9B6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#DCDAD5;font-family:-apple-system,"SF Pro Text",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:24px 0 96px}
+.phone{width:390px;height:844px;border-radius:54px;overflow:hidden;position:relative;box-shadow:0 0 0 11px #1b1b1d,0 0 0 13px #3a3a3d,0 30px 60px rgba(0,0,0,.35);background:var(--bg)}
+.screen{position:absolute;inset:0;display:flex;flex-direction:column}
+.status{height:50px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 34px 8px;font-weight:600;font-size:16px}
+.island{position:absolute;top:11px;left:50%;width:124px;height:36px;margin-left:-62px;background:#000;border-radius:20px;z-index:5}
+.nav{height:44px;flex:none;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 16px;font-size:17px}
+.nav button{background:none;border:0;font:inherit;color:inherit;cursor:pointer;justify-self:start;padding:10px 0}
+.nav button:last-child{justify-self:end}
+.nav b{font-weight:600}
+.home-ind{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;border-radius:3px;background:currentColor;opacity:.85}
+button{font-family:inherit}
+.tnum{font-variant-numeric:tabular-nums}
+
+/* ---------- Inicio ---------- */
+.inicio{background:var(--bg);color:var(--label)}
+.wordmark{font-family:Shrikhand,serif;font-size:40px;color:var(--brand);padding:6px 20px 2px;letter-spacing:.005em}
+.sub{font-size:15px;color:var(--sec);padding:0 20px 14px}
+.resume{margin:0 16px 22px;background:var(--card);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer}
+.resume .t{flex:1}.resume .t small{display:block;color:var(--sec);font-size:13px;margin-bottom:2px}
+.resume .t b{font-size:17px;font-weight:600}
+.pill{background:var(--brand);color:var(--brand-ink);border-radius:20px;padding:8px 16px;font-size:15px;font-weight:600;border:0;cursor:pointer}
+.sect{font-size:13px;color:var(--sec);text-transform:uppercase;letter-spacing:.02em;padding:0 32px 8px}
+.games{display:flex;flex-direction:column;gap:12px;padding:0 16px}
+.game{height:132px;border-radius:18px;position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:flex-end;padding:16px 18px;border:0;text-align:left}
+.game h3{font-size:30px;line-height:1;font-weight:400}
+.game p{font-size:13px;margin-top:6px;opacity:.85}
+.game .art{position:absolute;right:14px;top:14px;bottom:14px;width:150px}
+.g-truco{background:var(--tr-ground);color:var(--tr-ink)}.g-truco h3{font-family:Bevan,serif}
+.g-generala{background:radial-gradient(120% 140% at 30% 20%,#11704A,var(--ge-felt-dk));color:var(--ge-ink)}.g-generala h3{font-family:"Abril Fatface",serif;color:var(--ge-brass)}
+.g-burako{background:var(--bu-ground);color:var(--bu-ink)}.g-burako h3{font-family:"Alfa Slab One",serif}
+.tabbar{position:absolute;left:0;right:0;bottom:0;height:84px;background:rgba(249,249,249,.94);border-top:.5px solid var(--sep);display:flex;justify-content:space-around;padding-top:7px}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:#8E8E93;width:90px}
+.tab.on{color:var(--brand)}
+.tab svg{width:26px;height:26px}
+
+/* ---------- Truco ---------- */
+.truco{background:radial-gradient(130% 80% at 50% 30%,var(--tr-ground2),var(--tr-ground));color:var(--tr-ink)}
+.truco .nav button{color:var(--tr-accent)}
+.tr-board{flex:1;display:grid;grid-template-columns:1fr 1fr;position:relative;margin-top:6px}
+.tr-board:before{content:"";position:absolute;top:8px;bottom:12px;left:50%;width:1px;background:rgba(243,233,216,.18)}
+.tr-col{display:flex;flex-direction:column;align-items:center;cursor:pointer;padding-top:6px;-webkit-tap-highlight-color:transparent}
+.tr-col h2{font-family:Bevan,serif;font-weight:400;font-size:24px;line-height:1.1}
+.tr-score{font-family:Bevan,serif;line-height:1;margin:4px 0 6px;height:76px;display:flex;align-items:flex-end;transition:font-size .25s cubic-bezier(.2,.8,.2,1),color .25s}
+.tr-col.lead .tr-score{font-size:72px;color:var(--tr-accent)}
+.tr-col:not(.lead) .tr-score{font-size:52px;color:var(--tr-dim)}
+.tr-half{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--tr-dim);margin:2px 0 4px}
+.tr-groups{display:flex;flex-direction:column;align-items:center;gap:2px;height:210px}
+.tr-groups svg{width:66px;height:66px;overflow:visible}
+.tr-split{width:78%;height:0;border-top:2px dashed rgba(243,233,216,.35);margin:2px 0 6px}
+.tr-actions{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:6px 16px 0}
+.tr-btn{height:58px;border-radius:16px;border:0;display:flex;align-items:center;justify-content:center;gap:14px;cursor:pointer}
+.tr-plus{background:var(--tr-ink);color:var(--tr-ground);font-family:Bevan,serif;font-size:24px;flex:1;height:58px;border-radius:16px;border:0;cursor:pointer}
+.tr-minus{width:58px;height:58px;border-radius:16px;border:1.5px solid rgba(243,233,216,.3);background:none;color:var(--tr-ink);font-size:24px;cursor:pointer}
+.tr-row{display:flex;gap:8px}
+.tr-end{flex:none;height:96px;display:flex;align-items:flex-start;justify-content:center;padding-top:22px}
+.tr-end button{background:none;border:0;color:#E8826F;font-size:15px;cursor:pointer}
+.win{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;z-index:4;text-align:center}
+.win.on{display:flex}
+.truco .win{background:var(--tr-ink);color:var(--tr-ground)}
+.win h2{font-family:Bevan,serif;font-size:44px;font-weight:400}
+.win p{font-size:17px}
+.win button{margin-top:18px}
+
+/* ---------- Generala ---------- */
+.generala{background:radial-gradient(140% 90% at 50% 25%,#127049,var(--ge-felt) 45%,var(--ge-felt-dk));color:var(--ge-ink)}
+.generala .nav button{color:var(--ge-brass)}
+.generala .nav b{font-family:"Abril Fatface",serif;font-weight:400;font-size:22px;color:var(--ge-brass)}
+.ge-wrap{margin:8px 12px 0;border:1.5px solid rgba(216,180,90,.7);border-radius:14px;overflow:hidden;box-shadow:inset 0 0 0 4px rgba(8,61,40,.6),inset 0 0 0 5px rgba(216,180,90,.35)}
+.ge{width:100%;border-collapse:collapse;table-layout:fixed}
+.ge th,.ge td{height:46px;text-align:center;border-bottom:1px solid rgba(216,180,90,.18)}
+.ge thead th{height:52px;font-weight:600;font-size:15px;color:var(--ge-ink);border-bottom:1.5px solid rgba(216,180,90,.6)}
+.ge th.cat{width:110px;text-align:left;padding-left:12px;font-weight:500;font-size:15px;color:var(--ge-ink)}
+.ge th.cat span{display:inline-flex;align-items:center;gap:8px}
+.ge td{font-size:19px;font-weight:600;cursor:pointer;font-family:ui-rounded,"SF Pro Rounded",-apple-system,system-ui;font-variant-numeric:tabular-nums}
+.ge td.empty{color:transparent}
+.ge td.empty:after{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:rgba(244,240,226,.18)}
+.ge .turn{background:rgba(216,180,90,.13)}
+.ge thead th.turn{color:var(--ge-brass)}
+.ge thead th.turn small{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ge-brass);font-weight:700}
+.ge td.tach{color:var(--ge-dim)}
+.ge td.tach s{text-decoration-thickness:2px;text-decoration-color:var(--ge-red)}
+.ge td .sv{font-size:9px;vertical-align:super;color:var(--ge-brass);margin-left:1px;font-weight:800;letter-spacing:.05em}
+.ge tr.sum th,.ge tr.sum td{border-bottom:0;height:56px;font-family:"Abril Fatface",serif;font-size:22px;font-weight:400;color:var(--ge-brass)}
+.ge tr.sum th{font-size:17px}
+.ge tr.gap th,.ge tr.gap td{border-bottom:1.5px solid rgba(216,180,90,.5)}
+.die{width:18px;height:18px}
+.sheet-bg{position:absolute;inset:0;background:rgba(0,0,0,.35);display:none;z-index:6}
+.sheet-bg.on{display:block}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#F2F2F7;color:#111;border-radius:14px 14px 0 0;padding:8px 16px 40px}
+.sheet .grab{width:36px;height:5px;border-radius:3px;background:#C7C7CC;margin:0 auto 12px}
+.sheet h4{font-size:17px;font-weight:600;text-align:center;margin-bottom:4px}
+.sheet .hint{font-size:13px;color:var(--sec);text-align:center;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.opts button{height:52px;border-radius:12px;border:0;background:#fff;font-size:19px;font-weight:600;cursor:pointer;font-family:ui-rounded,-apple-system,system-ui}
+.opts button.serv{background:var(--ge-felt);color:var(--ge-brass)}
+.opts button.tach{background:#fff;color:#D70015;grid-column:span 3;font-size:17px}
+
+/* ---------- Burako ---------- */
+.burako{background:linear-gradient(var(--bu-ground),var(--bu-ground2));color:var(--bu-ink)}
+.burako .nav button{color:#F2C14E}
+.burako .nav b{font-family:"Alfa Slab One",serif;font-weight:400;font-size:20px}
+.tiles{display:inline-flex;gap:4px}
+.tile{display:inline-flex;align-items:center;justify-content:center;background:var(--bu-tile);border-radius:6px;box-shadow:0 2px 0 var(--bu-tile-edge),0 4px 8px rgba(0,0,0,.3);font-family:"Alfa Slab One",serif;line-height:1}
+.tile.lg{width:40px;height:54px;font-size:30px}
+.tile.md{width:28px;height:38px;font-size:20px;border-radius:5px}
+.tile.sm{width:20px;height:27px;font-size:14px;border-radius:4px}
+.c0{color:var(--bu-red)}.c1{color:var(--bu-blue)}.c2{color:var(--bu-black)}.c3{color:var(--bu-yellow)}
+.bu-teams{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:10px 16px 0}
+.bu-team{display:flex;flex-direction:column;align-items:center;gap:8px}
+.bu-team h2{font-size:15px;font-weight:600;letter-spacing:.02em}
+.bu-goal{font-size:13px;color:var(--bu-dim);text-align:center;margin-top:10px}
+.bu-table{margin:16px 16px 0;border-radius:14px;background:rgba(0,0,0,.18);overflow:hidden}
+.bu-table .r{display:grid;grid-template-columns:72px 1fr 1fr;align-items:center;height:44px;border-bottom:1px solid rgba(234,242,240,.08);font-size:17px}
+.bu-table .r:last-child{border:0}
+.bu-table .r span:first-child{padding-left:14px;color:var(--bu-dim);font-size:15px;text-align:left}
+.bu-table .r span{text-align:center;font-variant-numeric:tabular-nums;font-weight:600}
+.bu-table .r .neg{color:#FF8A80}
+.bu-table .hd{height:36px;font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+.bu-table .hd span{color:var(--bu-dim);font-weight:500}
+.bu-cta{position:absolute;left:16px;right:16px;bottom:42px;height:56px;border-radius:16px;border:0;background:#F2C14E;color:#1d1a10;font-size:17px;font-weight:700;cursor:pointer}
+/* B: calculadora */
+.bu-mini{display:flex;justify-content:space-between;align-items:center;margin:8px 16px 0;padding:10px 14px;background:rgba(0,0,0,.2);border-radius:14px}
+.bu-mini div{display:flex;flex-direction:column;gap:4px;align-items:flex-start}
+.bu-mini div:last-child{align-items:flex-end}
+.bu-mini small{font-size:12px;color:var(--bu-dim)}
+.seg{display:flex;margin:14px 16px 0;background:rgba(118,118,128,.24);border-radius:9px;padding:2px}
+.seg button{flex:1;height:32px;border:0;border-radius:7px;background:none;color:var(--bu-ink);font-size:14px;font-weight:600;cursor:pointer}
+.seg button.on{background:#F7F2E6;color:#1d1a10;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.form{margin:14px 16px 0;background:rgba(0,0,0,.18);border-radius:14px}
+.f{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 14px;border-bottom:1px solid rgba(234,242,240,.08);font-size:16px}
+.f:last-child{border:0}
+.f small{display:block;font-size:12px;color:var(--bu-dim)}
+.step{display:flex;align-items:center;gap:10px}
+.step button{width:44px;height:32px;border:0;background:rgba(118,118,128,.3);color:var(--bu-ink);font-size:20px;cursor:pointer}
+.step button:first-child{border-radius:8px 0 0 8px}.step button:last-child{border-radius:0 8px 8px 0}
+.step .v{min-width:22px;text-align:center;font-weight:700;font-variant-numeric:tabular-nums}
+.stepw{display:flex}
+.sw{width:51px;height:31px;border-radius:16px;background:rgba(120,120,128,.4);position:relative;cursor:pointer;border:0}
+.sw:after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;transition:left .2s}
+.sw.on{background:#34C759}.sw.on:after{left:22px}
+.num{width:84px;height:34px;border-radius:8px;border:0;background:rgba(118,118,128,.3);color:var(--bu-ink);text-align:right;padding:0 10px;font-size:16px;font-weight:600;font-variant-numeric:tabular-nums}
+.bu-sum{display:flex;justify-content:space-between;align-items:center;margin:14px 16px 0;font-size:15px;color:var(--bu-dim)}
+/* C: carrera */
+.race{margin:18px 16px 0;display:flex;flex-direction:column;gap:22px}
+.lane h2{font-size:15px;font-weight:600;margin-bottom:8px;display:flex;justify-content:space-between;align-items:flex-end}
+.lane h2 small{font-size:13px;color:var(--bu-dim);font-weight:500}
+.rack{height:88px;align-items:flex-start !important;border-radius:12px;background:linear-gradient(#0A2326,#103236);position:relative;box-shadow:inset 0 -6px 0 rgba(0,0,0,.25);padding:10px 12px;display:flex;align-items:center}
+.track{position:absolute;left:12px;right:12px;bottom:8px;height:6px;border-radius:3px;background:rgba(234,242,240,.12)}
+.track i{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+.manos{margin:24px 16px 0}
+.manos h3{font-size:13px;color:var(--bu-dim);text-transform:uppercase;letter-spacing:.06em;font-weight:500;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:rgba(0,0,0,.22);border-radius:10px;padding:8px 10px;font-size:13px;line-height:1.35;min-width:92px}
+.chip b{display:block;font-size:12px;color:var(--bu-dim);font-weight:500}
+/* ---------- Ícono ---------- */
+.icono{background:var(--bg);color:var(--label)}
+.icons{display:flex;flex-direction:column;gap:22px;padding:6px 24px}
+.ic{display:flex;gap:18px;align-items:center}
+.ic svg{width:112px;height:112px;border-radius:25px;flex:none;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.ic h3{font-size:17px;font-weight:600;margin-bottom:4px}
+.ic p{font-size:14px;color:var(--sec);line-height:1.35}
+
+/* ---------- Barra del prototipo (no es parte del diseño) ---------- */
+.proto-bar{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#111;color:#fff;border-radius:999px;display:flex;align-items:center;gap:6px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);font:600 14px -apple-system,system-ui;z-index:99}
+.proto-bar button{background:#2a2a2c;color:#fff;border:0;border-radius:999px;width:36px;height:36px;font-size:16px;cursor:pointer}
+.proto-bar span{min-width:230px;text-align:center}
+.proto-tag{position:fixed;top:12px;left:12px;font:700 11px -apple-system,system-ui;letter-spacing:.1em;color:#7a776f;text-transform:uppercase}
+</style></head>
+<body>
+<div class="proto-tag">Prototipo descartable · Porotos</div>
+<div class="phone" id="phone"></div>
+<div class="proto-bar"><button id="prev" aria-label="Anterior">←</button><span id="label"></span><button id="next" aria-label="Siguiente">→</button></div>
+
+<script>
+const SCREENS=[
+  ['inicio','Inicio · selector de juego'],
+  ['truco','Truco · fósforos'],
+  ['generala','Generala · paño de casino'],
+  ['burako-a','Burako A · planilla de manos'],
+  ['burako-b','Burako B · calculadora de mano'],
+  ['burako-c','Burako C · carrera a 3000'],
+  ['icono','Ícono de la app'],
+];
+const $=s=>document.querySelector(s);
+const phone=$('#phone');
+let cur=new URLSearchParams(location.search).get('screen')||'inicio';
+if(!SCREENS.find(s=>s[0]===cur))cur='inicio';
+
+const statusBar=(c='')=>`<div class="island"></div><div class="status" style="color:${c}"><span>21:47</span><span>●●● 82%</span></div>`;
+const nav=(title,left='‹ Inicio',right='Deshacer',onR='')=>`<nav class="nav"><button data-go="inicio">${left}</button><b>${title}</b><button ${onR}>${right}</button></nav>`;
+
+/* ---- Fósforos ---- */
+function match(x1,y1,x2,y2,headAtEnd){
+  const hx=headAtEnd?x2:x1, hy=headAtEnd?y2:y1;
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--tr-wood-dk)" stroke-width="5.5" stroke-linecap="round"/>
+  <line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--tr-wood)" stroke-width="3.6" stroke-linecap="round"/>
+  <ellipse cx="${hx}" cy="${hy}" rx="5" ry="5" fill="var(--tr-head)"/><circle cx="${hx-1.2}" cy="${hy-1.2}" r="2" fill="#E2664B" opacity=".8"/>`;
+}
+function group(n){ // n = 1..5 palitos
+  const s=[ [8,10,8,56,false], [10,8,56,8,true], [58,10,58,56,true], [10,58,56,58,false], [14,52,52,14,true] ];
+  return `<svg viewBox="0 0 66 66">${s.slice(0,n).map(a=>match(...a)).join('')}</svg>`;
+}
+function sticks(t,from,to){ // tantos entre from y to (malas 0..15, buenas 15..30)
+  const v=Math.max(0,Math.min(t,to)-from); let out='';
+  for(let i=0;i<v;i+=5) out+=group(Math.min(5,v-i));
+  return out;
+}
+const tr={a:18,b:11,hist:[],goal:30};
+function truco(){
+  const lead=tr.a===tr.b?null:(tr.a>tr.b?'a':'b');
+  const col=(k,name)=>`<div class="tr-col ${lead===k?'lead':''}" data-add="${k}">
+    <h2>${name}</h2><div class="tr-score tnum">${tr[k]}</div>
+    <div class="tr-half">Malas</div><div class="tr-groups">${sticks(tr[k],0,15)}</div>
+    <div class="tr-split"></div>
+    <div class="tr-half">Buenas</div><div class="tr-groups">${sticks(tr[k],15,30)}</div></div>`;
+  const w=tr.a>=30?'Nosotros':tr.b>=30?'Ellos':null;
+  return `<div class="screen truco">${statusBar('var(--tr-ink)')}${nav('Truco a 30','‹ Inicio','Deshacer','data-undo')}
+  <div class="tr-board">${col('a','Nosotros')}${col('b','Ellos')}</div>
+  <div class="tr-actions">
+    <div class="tr-row"><button class="tr-minus" data-sub="a" aria-label="Restar a Nosotros">−</button><button class="tr-plus" data-add="a">+1</button></div>
+    <div class="tr-row"><button class="tr-plus" data-add="b">+1</button><button class="tr-minus" data-sub="b" aria-label="Restar a Ellos">−</button></div>
+  </div>
+  <div class="tr-end"><button data-reset>Terminar partida</button></div>
+  <div class="win ${w?'on':''}"><h2>¡Ganaron ${w||''}!</h2><p class="tnum">${tr.a} a ${tr.b}</p><button class="pill" data-reset style="background:var(--tr-ground);color:var(--tr-ink)">Revancha</button></div>
+  <div class="home-ind" style="color:var(--tr-ink)"></div></div>`;
+}
+
+/* ---- Generala ---- */
+const dieDots={1:[[9,9]],2:[[5,5],[13,13]],3:[[5,5],[9,9],[13,13]],4:[[5,5],[13,5],[5,13],[13,13]],5:[[5,5],[13,5],[9,9],[5,13],[13,13]],6:[[5,4],[13,4],[5,9],[13,9],[5,14],[13,14]]};
+const die=n=>`<svg class="die" viewBox="0 0 18 18"><rect x=".75" y=".75" width="16.5" height="16.5" rx="4" fill="var(--ge-ink)"/>${dieDots[n].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.7" fill="var(--ge-felt-dk)"/>`).join('')}</svg>`;
+const CATS=[['1','1',[1,2,3,4,5]],['2','2',[2,4,6,8,10]],['3','3',[3,6,9,12,15]],['4','4',[4,8,12,16,20]],['5','5',[5,10,15,20,25]],['6','6',[6,12,18,24,30]],
+  ['esc','Escalera',[20],25],['full','Full',[30],35],['poker','Póker',[40],45],['gen','Generala',[50],'gana'],['doble','Doble G.',[100]]];
+const PL=['Facu','Caro','Martín','Lu'];
+const ge={turn:1,v:{
+  '1':[3,2,null,'x'],'2':[6,8,4,6],'3':[9,12,6,null],'4':[12,null,16,8],'5':[null,15,10,20],'6':[24,18,null,12],
+  esc:[{v:25,s:1},20,'x',null],full:[30,null,35,30],poker:['x',40,null,null],gen:[null,null,50,null],doble:[null,null,null,null]}};
+function cellVal(c){return c==null||c==='x'?0:(typeof c==='object'?c.v:c)}
+function generala(){
+  const tot=PL.map((_,i)=>CATS.reduce((s,c)=>s+cellVal(ge.v[c[0]][i]),0));
+  const row=(c,cls='')=>`<tr class="${cls}"><th class="cat"><span>${/^\d$/.test(c[0])?die(+c[0]):''}${/^\d$/.test(c[0])?'':c[1]}</span></th>${PL.map((_,i)=>{
+    const v=ge.v[c[0]][i]; const t=i===ge.turn?' turn':'';
+    if(v==null) return `<td class="empty${t}" data-cell="${c[0]}:${i}">·</td>`;
+    if(v==='x') return `<td class="tach${t}" data-cell="${c[0]}:${i}"><s>0</s></td>`;
+    if(typeof v==='object') return `<td class="${t}" data-cell="${c[0]}:${i}">${v.v}<span class="sv">S</span></td>`;
+    return `<td class="${t}" data-cell="${c[0]}:${i}">${v}</td>`;}).join('')}</tr>`;
+  return `<div class="screen generala">${statusBar('var(--ge-ink)')}${nav('Generala','‹ Inicio','Deshacer')}
+  <div class="ge-wrap"><table class="ge"><thead><tr><th class="cat"></th>${PL.map((p,i)=>`<th class="${i===ge.turn?'turn':''}">${i===ge.turn?'<small>Tira</small>':''}${p}</th>`).join('')}</tr></thead><tbody>
+  ${CATS.map((c,i)=>row(c,i===5?'gap':'')).join('')}
+  <tr class="sum"><th class="cat">Total</th>${tot.map((t,i)=>`<td class="tnum ${i===ge.turn?'turn':''}">${t}</td>`).join('')}</tr>
+  </tbody></table></div>
+  <div class="sheet-bg" id="sheet"></div>
+  <div class="home-ind" style="color:var(--ge-ink)"></div></div>`;
+}
+function openSheet(key,i){
+  const c=CATS.find(c=>c[0]===key);
+  const opts=c[2].map(v=>`<button data-set="${key}:${i}:${v}">${v}</button>`).join('')+
+    (c[3]?`<button class="serv" data-set="${key}:${i}:${c[3]==='gana'?'gana':'s'+c[3]}">${c[3]==='gana'?'Servida: gana':c[3]+' servido'}</button>`:'')+
+    `<button class="tach" data-set="${key}:${i}:x">Tachar</button>`;
+  const el=$('#sheet'); el.classList.add('on');
+  el.innerHTML=`<div class="sheet" onclick="event.stopPropagation()"><div class="grab"></div><h4>${c[1].length<2?'Al '+c[1]:c[1]} · ${PL[i]}</h4><p class="hint">Valores provisorios: las reglas se cierran en su propio ticket.</p><div class="opts">${opts}</div></div>`;
+}
+
+/* ---- Burako ---- */
+const bu={a:2340,b:1885,goal:3000,manos:[[620,410],[-150,535],[880,300],[990,640]]};
+const tileNum=(n,size='lg')=>`<span class="tiles">${String(n).split('').map((d,i)=>d==='-'?`<span class="tile ${size} c0">−</span>`:`<span class="tile ${size} c${i%4}">${d}</span>`).join('')}</span>`;
+function buHeader(){
+  return `<div class="bu-teams"><div class="bu-team"><h2>Nosotros</h2>${tileNum(bu.a,'lg')}</div><div class="bu-team"><h2>Ellos</h2>${tileNum(bu.b,'lg')}</div></div>`;
+}
+function burakoA(){
+  return `<div class="screen burako">${statusBar('var(--bu-ink)')}${nav('Burako')}
+  ${buHeader()}<p class="bu-goal">Se juega a ${bu.goal.toLocaleString('es-AR')} · faltan ${(bu.goal-bu.a).toLocaleString('es-AR')} para Nosotros</p>
+  <div class="bu-table"><div class="r hd"><span>Mano</span><span>Nosotros</span><span>Ellos</span></div>
+  ${bu.manos.map((m,i)=>`<div class="r"><span>${i+1}</span>${m.map(v=>`<span class="${v<0?'neg':''}">${v<0?'−'+Math.abs(v):v}</span>`).join('')}</div>`).join('')}
+  </div>
+  <button class="bu-cta" data-go="burako-b">Anotar mano 5</button>
+  <div class="home-ind" style="color:var(--bu-ink)"></div></div>`;
+}
+const calc={team:0,limpias:[1,0],sucias:[2,1],mesa:[385,240],mano:[20,95],cerro:[true,false],muerto:[true,true]};
+function calcTotal(t){return calc.limpias[t]*200+calc.sucias[t]*100+(+calc.mesa[t]||0)-(+calc.mano[t]||0)+(calc.cerro[t]?100:0)-(calc.muerto[t]?0:100)}
+function burakoB(){
+  const t=calc.team;
+  const st=(k,lbl,sub)=>`<div class="f"><div>${lbl}<small>${sub}</small></div><div class="step"><span class="v">${calc[k][t]}</span><span class="stepw"><button data-step="${k}:-1">−</button><button data-step="${k}:1">+</button></span></div></div>`;
+  const sw=(k,lbl,sub)=>`<div class="f"><div>${lbl}<small>${sub}</small></div><button class="sw ${calc[k][t]?'on':''}" data-sw="${k}" aria-label="${lbl}"></button></div>`;
+  const nm=(k,lbl,sub)=>`<div class="f"><div>${lbl}<small>${sub}</small></div><input class="num" inputmode="numeric" value="${calc[k][t]}" data-num="${k}"></div>`;
+  const tot=calcTotal(t);
+  return `<div class="screen burako">${statusBar('var(--bu-ink)')}${nav('Mano 5','‹ Partida','Guardar')}
+  <div class="bu-mini"><div><small>Nosotros</small>${tileNum(bu.a,'sm')}</div><div><small>Ellos</small>${tileNum(bu.b,'sm')}</div></div>
+  <div class="seg"><button class="${t===0?'on':''}" data-team="0">Nosotros</button><button class="${t===1?'on':''}" data-team="1">Ellos</button></div>
+  <div class="form">
+    ${st('limpias','Canastas limpias','200 cada una')}
+    ${st('sucias','Canastas sucias','100 cada una')}
+    ${nm('mesa','Fichas en la mesa','suma de lo bajado')}
+    ${nm('mano','Fichas en la mano','se restan')}
+    ${sw('cerro','Cerró','+100')}
+    ${sw('muerto','Tomó el muerto','si no, −100')}
+  </div>
+  <div class="bu-sum"><span>Esta mano</span>${tileNum(tot,'md')}</div>
+  <div class="bu-sum" style="margin-top:6px"><span>Quedaría en</span><b style="color:var(--bu-ink);font-size:17px" class="tnum">${((t?bu.b:bu.a)+tot).toLocaleString('es-AR')}</b></div>
+  <div class="home-ind" style="color:var(--bu-ink)"></div></div>`;
+}
+function burakoC(){
+  const lane=(name,v,col,k)=>`<div class="lane"><h2>${name}<small>faltan ${(bu.goal-v).toLocaleString('es-AR')}</small></h2>
+    <div class="rack">${tileNum(v,'lg')}<div class="track"><i style="width:${v/bu.goal*100}%;background:${col}"></i></div></div></div>`;
+  return `<div class="screen burako">${statusBar('var(--bu-ink)')}${nav('Burako a 3.000')}
+  <div class="race">${lane('Nosotros',bu.a,'#F2C14E')}${lane('Ellos',bu.b,'#7FB2F0')}</div>
+  <div class="manos"><h3>Manos</h3><div class="chips">${bu.manos.map((m,i)=>`<div class="chip tnum"><b>Mano ${i+1}</b>${m[0]<0?'−'+Math.abs(m[0]):'+'+m[0]} · ${m[1]<0?'−'+Math.abs(m[1]):'+'+m[1]}</div>`).join('')}</div></div>
+  <button class="bu-cta" data-go="burako-b">Anotar mano 5</button>
+  <div class="home-ind" style="color:var(--bu-ink)"></div></div>`;
+}
+
+/* ---- Inicio ---- */
+const icon=(d)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const bean=(fill,x=0,y=0,s=1,r=0)=>`<path transform="translate(${x} ${y}) rotate(${r}) scale(${s})" d="M-30,-2 C-30,-16 -16,-20 0,-20 C16,-20 30,-16 30,-2 C30,12 20,18 10,16 C5,15 3,13 0,13 C-3,13 -5,15 -10,16 C-20,18 -30,12 -30,-2 Z" fill="${fill}"/>`;
+function inicio(){
+  return `<div class="screen inicio">${statusBar('#111')}
+  <div class="wordmark">Porotos</div><div class="sub">Anotador de juegos de mesa</div>
+  <div class="resume" data-go="truco"><div class="t"><small>Partida en curso · Truco</small><b>Nosotros ${tr.a} · Ellos ${tr.b}</b></div><button class="pill" data-go="truco">Seguir</button></div>
+  <div class="sect">Nueva partida</div>
+  <div class="games">
+    <button class="game g-truco" data-go="truco"><div><h3>Truco</h3><p>A 15 o a 30, con fósforos</p></div>
+      <svg class="art" viewBox="0 0 150 104">${group(5).replace('<svg viewBox="0 0 66 66">','<g transform="translate(78 20)">').replace('</svg>','</g>')}${match(30,30,30,90,false)}${match(46,26,46,86,true)}</svg></button>
+    <button class="game g-generala" data-go="generala"><div><h3>Generala</h3><p>De 2 a 6 jugadores, con planilla</p></div>
+      <svg class="art" viewBox="0 0 150 104"><g transform="translate(66 18) rotate(-12) scale(2.2)">${die(5).replace('class="die"','width="18" height="18"')}</g><g transform="translate(102 46) rotate(14) scale(2.2)">${die(6).replace('class="die"','width="18" height="18"')}</g></svg></button>
+    <button class="game g-burako" data-go="burako-a"><div><h3>Burako</h3><p>En parejas o de a uno</p></div>
+      <div class="art" style="display:flex;align-items:center;justify-content:flex-end;gap:6px">${['1','3','1','3'].map((d,i)=>`<span class="tile lg c${i}">${d}</span>`).join('')}</div></button>
+  </div>
+  <div class="tabbar">
+    <div class="tab on">${icon('<rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.2" fill="currentColor"/><circle cx="15" cy="15" r="1.2" fill="currentColor"/>')}Jugar</div>
+    <div class="tab">${icon('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>')}Historial</div>
+    <div class="tab">${icon('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M17 14c2.3 0 4 1.5 4.5 4"/>')}Jugadores</div>
+  </div>
+  <div class="home-ind" style="color:#111"></div></div>`;
+}
+function icono(){
+  const ic1=`<svg viewBox="0 0 112 112"><rect width="112" height="112" fill="var(--brand)"/>${bean('#F6EBDD',56,58,1.35,-14)}<path d="M36 46 C46 38 66 38 76 44" stroke="#8E2A23" stroke-opacity=".18" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;
+  const ic2=`<svg viewBox="0 0 112 112"><rect width="112" height="112" fill="#F6EBDD"/>${bean('var(--brand)',34,40,.62,-30)}${bean('#2B211C',72,38,.62,20)}${bean('var(--brand)',40,76,.62,10)}${bean('#C9A15A',76,76,.62,-40)}</svg>`;
+  const ic3=`<svg viewBox="0 0 112 112"><rect width="112" height="112" fill="#17120F"/>${bean('var(--tr-head)',56,40,.7,-10)}${bean('#0D5A3B',36,74,.7,25)}${bean('#123B40',76,76,.7,-30)}</svg>`;
+  const row=(svg,h,p)=>`<div class="ic">${svg}<div><h3>${h}</h3><p>${p}</p></div></div>`;
+  return `<div class="screen icono">${statusBar('#111')}${nav('Ícono','‹ Inicio','')}
+  <div class="icons">
+  ${row(ic1,'Un poroto','Un poroto alubia grande sobre el colorado de la marca. Simple y legible a 29 pt.')}
+  ${row(ic2,'Puñado de porotos','Varios porotos sueltos, como los que se usan para contar en la mesa.')}
+  ${row(ic3,'Tres juegos','Un poroto por Juego, con el color de cada mundo: fósforo, paño y mesa de Burako.')}
+  </div><div class="home-ind" style="color:#111"></div></div>`;
+}
+
+const R={inicio,truco,generala,'burako-a':burakoA,'burako-b':burakoB,'burako-c':burakoC,icono};
+function render(){
+  phone.innerHTML=R[cur]();
+  const i=SCREENS.findIndex(s=>s[0]===cur);
+  $('#label').textContent=`${i+1}/${SCREENS.length} · ${SCREENS[i][1]}`;
+}
+function go(id){cur=id;history.replaceState(null,'','?screen='+id);render()}
+function cycle(d){const i=SCREENS.findIndex(s=>s[0]===cur);go(SCREENS[(i+d+SCREENS.length)%SCREENS.length][0])}
+$('#prev').onclick=()=>cycle(-1);$('#next').onclick=()=>cycle(1);
+addEventListener('keydown',e=>{if(e.target.matches('input,textarea,[contenteditable]'))return;if(e.key==='ArrowLeft')cycle(-1);if(e.key==='ArrowRight')cycle(1)});
+phone.addEventListener('click',e=>{
+  const t=e.target.closest('[data-go],[data-add],[data-sub],[data-undo],[data-reset],[data-cell],[data-set],[data-team],[data-step],[data-sw],#sheet');
+  if(!t)return;
+  const d=t.dataset;
+  if(d.go){e.stopPropagation();return go(d.go)}
+  if(d.add){if(tr.a<30&&tr.b<30){tr.hist.push([tr.a,tr.b]);tr[d.add]++}return render()}
+  if(d.sub){e.stopPropagation();if(tr[d.sub]>0){tr.hist.push([tr.a,tr.b]);tr[d.sub]--}return render()}
+  if('undo' in d){const h=tr.hist.pop();if(h){tr.a=h[0];tr.b=h[1]}return render()}
+  if('reset' in d){tr.a=0;tr.b=0;tr.hist=[];return render()}
+  if(d.cell){const[k,i]=d.cell.split(':');return openSheet(k,+i)}
+  if(d.set){const[k,i,v]=d.set.split(':');ge.v[k][+i]=v==='x'?'x':v==='gana'?{v:50,s:1}:v[0]==='s'?{v:+v.slice(1),s:1}:+v;ge.turn=(+i+1)%PL.length;return render()}
+  if(t.id==='sheet'){t.classList.remove('on');return}
+  if(d.team){calc.team=+d.team;return render()}
+  if(d.step){const[k,s]=d.step.split(':');calc[k][calc.team]=Math.max(0,calc[k][calc.team]+ +s);return render()}
+  if(d.sw){calc[d.sw][calc.team]=!calc[d.sw][calc.team];return render()}
+});
+phone.addEventListener('change',e=>{if(e.target.dataset.num){calc[e.target.dataset.num][calc.team]=+e.target.value||0;render()}});
+render();
+</script>
+</body></html>

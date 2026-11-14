@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=390">
+<title>Porotos · Pizarra</title>
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--board:#1E2A25;--board2:#25332D;--chalk:#ECEAE2;--chalk2:#B9BDB2;--yellow:#F2C94C;--salmon:#F08A7E;--sky:#8EC5E6}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:390px;height:844px;overflow:hidden;background:var(--board);color:var(--chalk);font-family:-apple-system,"SF Pro Text",system-ui,sans-serif}
+.status{height:47px;display:flex;justify-content:space-between;align-items:flex-end;padding:0 32px 8px;font-weight:600;font-size:16px}
+.nav{height:44px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 16px}
+.nav a{color:var(--yellow);font-size:17px;text-decoration:none}
+.nav a:last-child{justify-self:end}
+.nav b{font-size:17px;font-weight:600}
+.board{margin:12px 16px 0;display:grid;grid-template-columns:1fr 1px 1fr;gap:0 18px;height:560px}
+.rule-v{background:var(--chalk2);opacity:.35}
+.team{display:flex;flex-direction:column;align-items:center}
+.team h2{font-family:Kalam,cursive;font-weight:700;font-size:34px;line-height:1;letter-spacing:.01em}
+.team.lead h2{color:var(--yellow)}
+.score{font-family:Kalam,cursive;font-weight:700;line-height:1;margin:6px 0 2px}
+.lead .score{font-size:84px}
+.trail .score{font-size:60px;color:var(--chalk2)}
+.half{font-size:13px;color:var(--chalk2);letter-spacing:.04em;text-transform:uppercase;margin:10px 0 6px}
+.sticks{display:flex;flex-direction:column;gap:6px;align-items:center;min-height:186px}
+.sticks svg{width:52px;height:52px}
+.split{width:100%;height:2px;background:var(--chalk);opacity:.7;border-radius:2px;margin:6px 0 0;transform:rotate(-.6deg)}
+.actions{position:absolute;left:16px;right:16px;top:690px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.plus{height:64px;border:2.5px solid var(--chalk);border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;font-family:Kalam,cursive;font-size:30px;font-weight:700;color:var(--chalk)}
+.lead-btn{border-color:var(--yellow);color:var(--yellow)}
+.minus{font-family:-apple-system,system-ui;font-size:15px;color:var(--chalk2);font-weight:500}
+.end{position:absolute;left:0;right:0;top:784px;text-align:center;color:var(--salmon);font-size:15px}
+.home{position:absolute;bottom:8px;left:50%;width:134px;height:5px;margin-left:-67px;background:var(--chalk);border-radius:3px;opacity:.8}
+svg line{stroke:var(--chalk);stroke-width:4.5;stroke-linecap:round}
+.lead svg line{stroke:var(--chalk)}
+.trail svg line{stroke:var(--chalk2)}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="chalk"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="2.2"/></filter>
+<symbol id="g5" viewBox="0 0 52 52"><g filter="url(#chalk)"><line x1="8" y1="7" x2="44" y2="8"/><line x1="45" y1="8" x2="44" y2="44"/><line x1="44" y1="45" x2="8" y2="44"/><line x1="7" y1="44" x2="8" y2="8"/><line x1="10" y1="42" x2="42" y2="10"/></g></symbol>
+<symbol id="g3" viewBox="0 0 52 52"><g filter="url(#chalk)"><line x1="8" y1="7" x2="44" y2="8"/><line x1="45" y1="8" x2="44" y2="44"/><line x1="44" y1="45" x2="8" y2="44"/></g></symbol>
+<symbol id="g1" viewBox="0 0 52 52"><g filter="url(#chalk)"><line x1="8" y1="7" x2="44" y2="8"/></g></symbol>
+</defs></svg>
+<div class="status"><span>21:47</span><span>●●● 82%</span></div>
+<nav class="nav"><a href="#">‹ Partidas</a><b>Truco a 30</b><a href="#">Deshacer</a></nav>
+<section class="board">
+  <div class="team lead">
+    <h2>Nosotros</h2>
+    <div class="score">18</div>
+    <div class="half">Malas</div>
+    <div class="sticks"><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg></div>
+    <div class="split"></div>
+    <div class="half">Buenas</div>
+    <div class="sticks"><svg><use href="#g3"/></svg></div>
+  </div>
+  <div class="rule-v"></div>
+  <div class="team trail">
+    <h2>Ellos</h2>
+    <div class="score">11</div>
+    <div class="half">Malas</div>
+    <div class="sticks"><svg><use href="#g5"/></svg><svg><use href="#g5"/></svg><svg><use href="#g1"/></svg></div>
+    <div class="split"></div>
+    <div class="half">Buenas</div>
+    <div class="sticks"></div>
+  </div>
+</section>
+<div class="actions">
+  <div class="plus lead-btn">+1 <span class="minus">−</span></div>
+  <div class="plus">+1 <span class="minus">−</span></div>
+</div>
+<div class="end">Terminar partida</div>
+<div class="home"></div>
+</body></html>
