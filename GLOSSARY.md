@@ -31,3 +31,9 @@ Lenguaje del dominio de la app de anotador de juegos de mesa. Solo términos, no
 **Servido**: Juego logrado en el primer tiro, que suma un bonus.
 
 **Tachar**: Anotar cero en una categoría de la Planilla.
+
+**Generala servida**: Generala lograda en el primer tiro. En la Variante estándar gana la Partida en el acto.
+
+**Doble Generala**: Segunda Generala de un Jugador. Solo cuenta si ya tiene la Generala anotada con puntos (no tachada).
+
+**Turno**: El momento en que le toca tirar a un Jugador. Termina cuando anota una categoría de la Planilla.
