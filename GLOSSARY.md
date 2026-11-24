@@ -4,17 +4,21 @@ Lenguaje del dominio de la app de anotador de juegos de mesa. Solo términos, no
 
 **Juego**: Uno de los juegos de mesa soportados (Generala, Burako, Truco). Define sus reglas y su forma de anotar.
 
-**Partida**: Una sesión concreta de un Juego, con participantes, desde el inicio hasta que hay un ganador o se abandona. Una Partida terminada pasa al Historial.
+**Partida**: Una sesión concreta de un Juego, con sus Participantes y su Variante, desde el inicio hasta que hay ganadores o se abandona. Está En curso, Terminada o Abandonada. Puede haber varias Partidas En curso a la vez.
 
-**Jugador**: Persona guardada en la app y reutilizable entre Partidas.
+**Participante**: Quien suma puntos y puede ganar en una Partida. Tiene un nombre y cero o más Jugadores. Según el Juego, es un Jugador o un Equipo.
 
-**Equipo**: Agrupación de Jugadores que suman tantos en conjunto (Truco siempre; Burako cuando se juega en parejas).
+**Anotación**: Cada acción de anotar puntos en una Partida (por ejemplo, un tanto en Truco, una celda de la Planilla en Generala o una Mano en Burako). Los puntajes de una Partida se calculan a partir de sus Anotaciones.
 
-**Mano**: Una ronda de juego dentro de una Partida que produce puntos (por ejemplo, en Burako, una mano completa). En Truco no se registran Manos, solo Tantos.
+**Ganadores**: Los Participantes que ganan una Partida Terminada. Suele ser uno, pero en Generala puede haber un empate compartido. Los Jugadores ganan a través de su Participante.
 
-**Variante**: Conjunto de opciones de reglas elegidas al crear una Partida (por ejemplo, Truco a 15 o a 30). Cada Juego tiene una Variante estándar argentina.
+**Jugador**: Persona guardada en la app y reutilizable entre Partidas. Solo tiene un nombre, que no se repite. No hay invitados: un nombre nuevo al crear una Partida queda guardado como Jugador. Si se borra, el Historial conserva el nombre con el que jugó. Aparece como máximo una vez por Partida.
 
-**Historial**: Listado de Partidas terminadas.
+**Equipo**: Participante que agrupa Jugadores bajo un nombre propio (Truco siempre; Burako cuando se juega en parejas, con exactamente dos Jugadores). Existe solo dentro de su Partida.
+
+**Variante**: Conjunto de opciones de reglas elegidas al crear una Partida (por ejemplo, Truco a 15 o a 30). Cada Juego tiene una Variante estándar argentina. Una Partida nueva propone la Variante y los Participantes de la última Partida de ese Juego.
+
+**Historial**: Listado de Partidas Terminadas.
 
 ## Truco
 
@@ -40,7 +44,7 @@ Lenguaje del dominio de la app de anotador de juegos de mesa. Solo términos, no
 
 ## Burako
 
-**Participante**: Quien suma puntos en una Partida de Burako: un Jugador si se juega individual, o un Equipo si se juega en parejas.
+**Mano**: Una ronda completa de Burako, que produce puntos para cada Participante. Es la Anotación de Burako.
 
 **Canasta limpia**: Juego de siete o más fichas sin comodines.
 
