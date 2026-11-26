@@ -20,6 +20,8 @@ Lenguaje del dominio de la app de anotador de juegos de mesa. Solo términos, no
 
 **Historial**: Listado de Partidas Terminadas.
 
+**Revancha**: Partida nueva que repite el Juego, la Variante y los Participantes (en el mismo orden) de una Partida Terminada.
+
 ## Truco
 
 **Tantos**: Puntos de un Equipo en Truco.

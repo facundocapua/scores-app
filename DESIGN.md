@@ -34,14 +34,14 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 - **Turno:** la columna del Jugador que tira se resalta con un velo de latón y el rótulo "Tira".
 - **Celdas:** vacías, con un punto tenue; Servido con una "S" en superíndice latón; Tachado como un 0 tachado.
 - **Display:** **Abril Fatface** para el título y los totales. Los números de las celdas van en SF Rounded tabular.
-- **Interacción:** tocar una celda abre un sheet nativo con los valores posibles, la opción servida y Tachar. Al anotar, el turno pasa al Jugador siguiente.
+- **Interacción:** tocar una celda abre un sheet nativo con los valores posibles, la opción servida y Tachar. Al anotar, el turno pasa al Jugador siguiente. Terminar partida va en el menú "⋯".
 
 ## Burako: fichas sobre la mesa
 
 - **Fondo:** mesa verde petróleo, de `#123B40` a `#0C2C30`. Texto `#EAF2F0`, secundario `#9DB9B6` y acción `#F2C14E`.
 - **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y amarillo `#D9930D`. Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
 - **Display:** **Alfa Slab One** para fichas y títulos.
-- **Pantalla de Partida (carrera):** un atril por Equipo con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N".
+- **Pantalla de Partida (carrera):** un atril por Equipo con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N". Terminar partida va en el menú "⋯".
 - **Anotar mano (calculadora):** pantalla con el total de cada Equipo en miniatura y un segmented control Nosotros/Ellos. Incluye steppers para canastas limpias y sucias, campos numéricos para las fichas en mesa y en mano, y switches para Cerró y Tomó el muerto. Muestra el resultado de la mano en fichas y en cuánto quedaría el Equipo. Los campos exactos dependen de las reglas de Burako.
 
 ## Ícono
