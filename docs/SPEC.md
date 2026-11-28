@@ -298,6 +298,7 @@ Structure: native iOS shell with the tab bar **Jugar · Historial · Jugadores**
 ### 6.2 Undoing the ending
 
 - A Finished Match is reopened only with Undo from the end screen.
+- In a Match that **Ended early**, that Undo reverts only the ending: the Match goes back In progress with the same score, without touching its Entries. A second Undo, already in the Match, reverts the last Entry.
 - On leaving there, through Rematch, through Home, or because the app was closed, the ending becomes final.
 - The History detail is always read-only.
 

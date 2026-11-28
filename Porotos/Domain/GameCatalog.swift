@@ -5,8 +5,8 @@ import Foundation
 enum GameCatalog {
     static func rules(for kind: GameKind) -> (any GameRules.Type)? {
         switch kind {
-        case .truco, .generala, .burako:
-            nil
+        case .truco: Truco.self
+        case .generala, .burako: nil
         }
     }
 }
