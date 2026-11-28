@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Puñado de porotos: four loose beans on a light background. No text, no transparency. -->
+  <defs>
+    <path id="bean" d="M -200,15 C -225,-85 -115,-135 -25,-100 C 35,-78 85,-112 145,-88 C 225,-55 235,60 160,108 C 85,155 -40,140 -125,115 C -180,98 -195,55 -200,15 Z"/>
+    <g id="detail">
+      <path d="M -75,-62 Q -10,-30 70,-62" fill="none" stroke="#000" stroke-opacity="0.28" stroke-width="12" stroke-linecap="round"/>
+      <path d="M -75,-52 Q -10,-20 70,-52" fill="none" stroke="#fff" stroke-opacity="0.14" stroke-width="6" stroke-linecap="round"/>
+      <ellipse cx="45" cy="55" rx="62" ry="18" transform="rotate(-8 45 55)" fill="#fff" fill-opacity="0.22"/>
+    </g>
+  </defs>
+  <rect width="1024" height="1024" fill="#F6EBDD"/>
+  <g transform="translate(0 -30)">
+  <!-- soft shadows -->
+  <g fill="#5a3a22" fill-opacity="0.16">
+    <use xlink:href="#bean" transform="translate(320 330) rotate(-30) scale(0.92) translate(0 14)"/>
+    <use xlink:href="#bean" transform="translate(705 390) rotate(72) scale(0.88) translate(0 14)"/>
+    <use xlink:href="#bean" transform="translate(350 715) rotate(12) scale(0.9) translate(0 14)"/>
+    <use xlink:href="#bean" transform="translate(715 760) rotate(-48) scale(0.9) translate(0 14)"/>
+  </g>
+  <g transform="translate(320 330) rotate(-30) scale(0.92)"><use xlink:href="#bean" fill="#8E2A23"/><use xlink:href="#detail"/></g>
+  <g transform="translate(705 390) rotate(72) scale(0.88)"><use xlink:href="#bean" fill="#2B211C"/><use xlink:href="#detail"/></g>
+  <g transform="translate(350 715) rotate(12) scale(0.9)"><use xlink:href="#bean" fill="#C9A15A"/><use xlink:href="#detail"/></g>
+  <g transform="translate(715 760) rotate(-48) scale(0.9)"><use xlink:href="#bean" fill="#8E2A23"/><use xlink:href="#detail"/></g>
+  </g>
+</svg>
