@@ -60,4 +60,4 @@ Ninguna todavía. No hay usuarios, testimonios ni capturas. No hay que inventarl
 
 ## Accessibility & Inclusion
 
-Se lee a distancia de brazo y con poca luz, y se usa con una mano. Soporte de Dynamic Type y modo oscuro (el detalle está como fog en el mapa).
+Se lee a distancia de brazo y con poca luz, y se usa con una mano. WCAG AA, Dynamic Type, VoiceOver completo y mundos de Juego siempre oscuros. El detalle está en `DESIGN.md`.

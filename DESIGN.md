@@ -29,17 +29,17 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 ## Generala: paño de casino
 
 - **Fondo:** paño verde con luz cenital, de `#127049` a `#0D5A3B` y `#083D28`.
-- **Acentos:** latón `#D8B45A` para el título, el marco de la planilla, los totales y el Jugador que tira. Texto `#F4F0E2`. Tachado en `#E05A4F`.
+- **Acentos:** latón `#D8B45A` para el título, el marco de la planilla, los totales y el Jugador que tira. Texto `#F4F0E2`. El latón solo va en texto grande y bordes, nunca en texto chico.
 - **Planilla:** las categorías van en filas (1 a 6 con caras de dado, Escalera, Full, Póker, Generala, Doble Generala y Total) y los Jugadores en columnas. Una línea separa la sección de números de la de juegos.
 - **Turno:** la columna del Jugador que tira se resalta con un velo de latón y el rótulo "Tira".
-- **Celdas:** vacías, con un punto tenue; Servido con una "S" en superíndice latón; Tachado como un 0 tachado.
+- **Celdas:** vacías, con un punto tenue; Servido con una "S" en superíndice latón; Tachado como un "✕" en el color del texto `#F4F0E2` (no depende solo del color).
 - **Display:** **Abril Fatface** para el título y los totales. Los números de las celdas van en SF Rounded tabular.
 - **Interacción:** tocar una celda abre un sheet nativo con los valores posibles, la opción servida y Tachar. Al anotar, el turno pasa al Jugador siguiente. Terminar partida va en el menú "⋯".
 
 ## Burako: fichas sobre la mesa
 
 - **Fondo:** mesa verde petróleo, de `#123B40` a `#0C2C30`. Texto `#EAF2F0`, secundario `#9DB9B6` y acción `#F2C14E`.
-- **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y amarillo `#D9930D`. Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
+- **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y amarillo oscurecido a un ámbar que pase 4.5:1 sobre el marfil (el `#D9930D` original no alcanza; el tono exacto lo elige impeccable). Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
 - **Display:** **Alfa Slab One** para fichas y títulos.
 - **Pantalla de Partida (carrera):** un atril por Equipo con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N". Terminar partida va en el menú "⋯".
 - **Anotar mano (calculadora):** pantalla con el total de cada Equipo en miniatura y un segmented control Nosotros/Ellos. Incluye steppers para canastas limpias y sucias, campos numéricos para las fichas en mesa y en mano, y switches para Cerró y Tomó el muerto. Muestra el resultado de la mano en fichas y en cuánto quedaría el Equipo. Los campos exactos dependen de las reglas de Burako.
@@ -55,6 +55,16 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 - Las fuentes de display (Shrikhand, Bevan, Abril Fatface y Alfa Slab One) van incluidas en la app y solo se usan en momentos de display. Todo el texto de UI usa SF con Dynamic Type.
 - Los valores de puntaje que muestra el prototipo son provisorios hasta que se cierren las reglas de cada Juego.
 
-## Abierto
+## Accesibilidad y uso en la mesa
 
-Estos temas están en el fog del mapa: el modo claro de los mundos de Juego (hoy son todos oscuros o de color pleno), el comportamiento con Dynamic Type grande en la planilla de Generala y la pantalla siempre encendida.
+Decidido en [Accesibilidad y uso en la mesa](https://github.com/facundocapua/scores-app/issues/11).
+
+- **Contraste:** WCAG AA. 4.5:1 para texto chico y 3:1 para texto grande y gráficos. Sin variante propia para Aumentar contraste.
+- **Modo claro:** el shell sigue el modo del sistema. Los mundos de Juego son siempre oscuros (el fin de Truco se invierte igual).
+- **Dynamic Type:** el shell y las pantallas de texto escalan sin límite. Los números de display de los mundos (el total de Truco, las fichas de Burako) no escalan. La planilla de Generala escala hasta xxxLarge; desde AX1, la columna de categorías queda fija y las columnas de Jugadores se desplazan en horizontal.
+- **VoiceOver:** soporte completo. Los fósforos se leen como "Nosotros, 17, buenas 2" y son ajustables (deslizar arriba o abajo suma o resta un tanto). Las celdas se leen como "Ana, Full, 30, servido". Los totales en fichas se leen como número ("1.240, faltan 1.760").
+- **Pantalla encendida:** automática mientras hay una Partida abierta en primer plano, sin opción. En el shell, el Historial y la pantalla de fin vuelve al comportamiento normal.
+- **Orientación:** solo vertical.
+- **Una mano:** las acciones frecuentes van en los dos tercios de abajo. Deshacer queda en la barra de navegación. Sin gestos ocultos (nada de agitar para deshacer).
+- **Hápticos:** un toque liviano por cada tanto o celda anotada, uno de éxito al terminar y uno de advertencia al deshacer. Respetan el ajuste del sistema, sin interruptor propio.
+- **Reducir movimiento:** las animaciones (el fósforo, las fichas, la inversión del fin) pasan a ser fundidos cortos.
