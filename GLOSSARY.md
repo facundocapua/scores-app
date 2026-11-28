@@ -1,65 +1,67 @@
-# Glosario
+# Glossary
 
-Lenguaje del dominio de la app de anotador de juegos de mesa. Solo términos, no detalles de implementación.
+Domain language of the board-game scorekeeper app. Terms only, no implementation details. The Spanish word shown as "UI" is what appears in the app.
 
-**Juego**: Uno de los juegos de mesa soportados (Generala, Burako, Truco). Define sus reglas y su forma de anotar.
+**Game** (UI: *Juego*): One of the supported board games (Generala, Burako, Truco). It defines its rules and its way of scoring.
 
-**Partida**: Una sesión concreta de un Juego, con sus Participantes y su Variante, desde el inicio hasta que hay ganadores. Está En curso o Terminada; una Partida que no se quiere terminar se descarta, es decir, se borra. Puede haber varias Partidas En curso a la vez.
+**Match** (UI: *Partida*): A concrete session of a Game, with its Participants and its Variant, from the start until there are Winners. It is In progress or Finished; a Match that nobody wants to finish is discarded, that is, deleted. Several Matches can be In progress at the same time.
 
-**Terminada antes**: Partida Terminada a pedido antes de llegar al fin que marcan las reglas de su Juego. Ganan los Participantes que iban primeros en ese momento.
+**Ended early** (UI: *Terminada antes*): A Finished Match that was ended on request before reaching the end set by the rules of its Game. The Participants who were ahead at that moment win.
 
-**Participante**: Quien suma puntos y puede ganar en una Partida. Tiene un nombre y cero o más Jugadores. Según el Juego, es un Jugador o un Equipo.
+**Participant** (UI: *Participante*): Whoever scores points and can win a Match. Has a name and zero or more Players. Depending on the Game, it is a Player or a Team.
 
-**Anotación**: Cada acción de anotar puntos en una Partida (por ejemplo, un tanto en Truco, una celda de la Planilla en Generala o una Mano en Burako). Los puntajes de una Partida se calculan a partir de sus Anotaciones.
+**Entry** (UI: *Anotación*): Each action of scoring points in a Match (for example, a point in Truco, a Scoresheet cell in Generala or a Hand in Burako). The scores of a Match are computed from its Entries.
 
-**Ganadores**: Los Participantes que ganan una Partida Terminada. Suele ser uno, pero puede haber un empate compartido (en Generala, o en una Partida Terminada antes). Los Jugadores ganan a través de su Participante.
+**Winners** (UI: *Ganadores*): The Participants who win a Finished Match. Usually one, but there can be a shared tie (in Generala, or in a Match that Ended early). Players win through their Participant.
 
-**Jugador**: Persona guardada en la app y reutilizable entre Partidas. Solo tiene un nombre, que no se repite. No hay invitados: un nombre nuevo al crear una Partida queda guardado como Jugador. Si se borra, el Historial conserva el nombre con el que jugó. Aparece como máximo una vez por Partida.
+**Player** (UI: *Jugador*): A person saved in the app and reusable across Matches. Has only a name, which is unique. There are no guests: a new name typed when creating a Match is saved as a Player. If deleted, the History keeps the name the Player played under. Appears at most once per Match.
 
-**Equipo**: Participante que agrupa Jugadores bajo un nombre propio (Truco siempre; Burako cuando se juega en parejas, con exactamente dos Jugadores). Existe solo dentro de su Partida.
+**Team** (UI: *Equipo*): A Participant that groups Players under its own name (always in Truco; in Burako when played in pairs, with exactly two Players). It exists only within its Match.
 
-**Variante**: Conjunto de opciones de reglas elegidas al crear una Partida (por ejemplo, Truco a 15 o a 30). Cada Juego tiene una Variante estándar argentina. Una Partida nueva propone la Variante y los Participantes de la última Partida de ese Juego.
+**Seat**: A Player's place within a Participant (one per Player in a Team, or the single Player of an individual Participant). If the Player is deleted, the Seat keeps the last name they had, so the Match still shows it. Code-only term: the UI never names it.
 
-**Historial**: Listado de Partidas Terminadas.
+**Variant** (UI: *Variante*): A set of rule options chosen when creating a Match (for example, Truco to 15 or to 30). Each Game has a standard Argentine Variant. A new Match proposes the Variant and the Participants of the last Match of that Game.
 
-**Revancha**: Partida nueva que repite el Juego, la Variante y los Participantes (en el mismo orden) de una Partida Terminada.
+**History** (UI: *Historial*): The list of Finished Matches.
+
+**Rematch** (UI: *Revancha*): A new Match that repeats the Game, the Variant and the Participants (in the same order) of a Finished Match.
 
 ## Truco
 
-**Tantos**: Puntos de un Equipo en Truco.
+**Points** (UI: *Tantos*): A Team's points in Truco.
 
-**Malas / Buenas**: Las dos mitades del tanteador de Truco en una partida a 30: de 0 a 15 son las malas y de 15 a 30 las buenas. Una partida a 15 no se divide.
+**Malas / buenas** (UI: *Malas / Buenas*): The two halves of the Truco scoreboard in a match to 30: from 0 to 15 are the malas (first half) and from 15 to 30 the buenas (second half). A match to 15 is not divided.
 
-**Fósforos**: Representación visual clásica de los tantos, en grupos de cinco (cuadrado con diagonal).
+**Matchsticks** (UI: *Fósforos*): The classic visual representation of the points, in groups of five (a square with a diagonal).
 
 ## Generala
 
-**Planilla**: Tabla de categorías (1 a 6, Escalera, Full, Póker, Generala, Doble Generala) por Jugador.
+**Scoresheet** (UI: *Planilla*): Table of categories (ones to sixes, Straight, Full house, Four of a kind, Generala, Double Generala) per Player.
 
-**Servido**: Juego logrado en el primer tiro, que suma un bonus.
+**Served** (UI: *Servido*): A combination made on the first roll, which adds a bonus.
 
-**Tachar**: Anotar cero en una categoría de la Planilla.
+**Scratch** (UI: *Tachar*): To score zero in a Scoresheet category. A category scored this way is Scratched (UI: *Tachado*).
 
-**Generala servida**: Generala lograda en el primer tiro. En la Variante estándar gana la Partida en el acto.
+**Served Generala** (UI: *Generala servida*): A Generala made on the first roll. In the standard Variant it wins the Match on the spot.
 
-**Doble Generala**: Segunda Generala de un Jugador. Solo cuenta si ya tiene la Generala anotada con puntos (no tachada).
+**Double Generala** (UI: *Doble Generala*): A Player's second Generala. It only counts if the Player already has the Generala scored with points (not Scratched).
 
-**Turno**: El momento en que le toca tirar a un Jugador. Termina cuando anota una categoría de la Planilla.
+**Turn** (UI: *Turno*): The moment when a Player is up to roll. It ends when the Player scores a Scoresheet category.
 
 ## Burako
 
-**Mano**: Una ronda completa de Burako, que produce puntos para cada Participante. Es la Anotación de Burako.
+**Hand** (UI: *Mano*): One complete round of Burako, which produces points for each Participant. It is the Burako Entry.
 
-**Canasta limpia**: Juego de siete o más fichas sin comodines.
+**Clean canasta** (UI: *Canasta limpia*): A meld of seven or more tiles without jokers.
 
-**Canasta sucia**: Juego de siete o más fichas que incluye algún comodín.
+**Dirty canasta** (UI: *Canasta sucia*): A meld of seven or more tiles that includes at least one joker.
 
-**Fichas en mesa**: Suma del valor de las fichas que un Participante bajó en la Mano.
+**Tiles melded** (UI: *Fichas en mesa*): Sum of the value of the tiles a Participant laid down in the Hand.
 
-**Fichas en mano**: Suma del valor de las fichas que un Participante no llegó a bajar. Se resta.
+**Tiles in hand** (UI: *Fichas en mano*): Sum of the value of the tiles a Participant did not manage to lay down. It is subtracted.
 
-**Cerrar**: Quedarse sin fichas y terminar la Mano. En cada Mano cierra un Participante o ninguno (por ejemplo, si se acaba el pozo).
+**Go out** (UI: *Cerrar*; "Went out" is *Cerró*): To run out of tiles and end the Hand. In each Hand one Participant goes out, or none (for example, if the stock runs out).
 
-**Muerto**: Pilón de fichas de reserva que un Participante toma al quedarse sin fichas por primera vez. Tomarlo o no tomarlo suma o resta según la Variante.
+**Muerto** (UI: *Muerto*): The reserve pile of tiles that a Participant takes on running out of tiles for the first time. Taking it or not taking it adds or subtracts points depending on the Variant.
 
-**Meta**: Puntaje que, al alcanzarse al final de una Mano, termina la Partida.
+**Target score** (UI: *Meta*): The score that, when reached at the end of a Hand, ends the Match.

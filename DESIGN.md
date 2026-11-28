@@ -1,70 +1,70 @@
 # Design
 
-Identidad visual de **Porotos**. Decidida en el ticket [Identidad visual con impeccable](https://github.com/facundocapua/scores-app/issues/3). El prototipo de referencia está en la rama `prototype/identidad-visual` (`prototypes/identidad-visual/index.html`).
+Visual identity of **Porotos**. Decided in the ticket [Visual identity with impeccable](https://github.com/facundocapua/scores-app/issues/3). The reference prototype is on the branch `prototype/identidad-visual` (`prototypes/identidad-visual/index.html`).
 
-## Principio
+## Principle
 
-**Un shell común y un mundo por Juego.** La app (Inicio, Historial, Jugadores y "Acerca de Porotos") es iOS nativo con el color de la marca. Al entrar a una Partida, la pantalla de anotación adopta el mundo propio de su Juego. El mundo aporta fondo, paleta, tipografía de display y un gesto distintivo. La navegación y los controles son siempre los nativos de iOS (barra de navegación, sheets, steppers, switches y segmented control).
+**A common shell and one world per Game.** The app (Home, History, Players and "Acerca de Porotos", i.e. About Porotos) is native iOS with the brand color. On entering a Match, the scoring screen adopts the Game's own world. The world provides background, palette, display typography and a distinctive gesture. Navigation and controls are always the native iOS ones (navigation bar, sheets, steppers, switches and segmented control).
 
-Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elementos.
+Adding a new Game means defining its world with these same four elements.
 
 ## Shell (Porotos)
 
-- **Marca:** poroto colorado `#8E2A23` como tint, con texto `#FFF6EE` sobre él.
-- **Fondo y superficies:** colores semánticos del sistema (`systemGroupedBackground` y `secondarySystemGroupedBackground`). Modo claro y oscuro automáticos.
-- **Wordmark:** "Porotos" en **Shrikhand**, solo en el título del inicio. Todo lo demás usa SF Pro con Dynamic Type.
-- **Inicio = selector de juego:** arriba, una fila por Partida En curso con el botón Seguir (hasta 3, más "Ver todas"); debajo, "Nueva partida" con una tarjeta grande por Juego que anticipa su mundo (fósforos, dados sobre paño y fichas). El flujo completo está en `docs/SPEC.md`.
-- **Tab bar:** Jugar · Historial · Jugadores.
+- **Brand:** bean red `#8E2A23` as tint, with `#FFF6EE` text on top of it.
+- **Background and surfaces:** system semantic colors (`systemGroupedBackground` and `secondarySystemGroupedBackground`). Automatic light and dark mode.
+- **Wordmark:** "Porotos" in **Shrikhand**, only in the Home title. Everything else uses SF Pro with Dynamic Type.
+- **Home = game picker:** at the top, one row per In progress Match with the "Seguir" (Continue) button (up to 3, plus "Ver todas", See all); below, "Nueva partida" (New match) with one large card per Game that previews its world (matchsticks, dice on felt and tiles). The full flow is in `docs/SPEC.md`.
+- **Tab bar:** Jugar · Historial · Jugadores (Play · History · Players).
 
-## Truco: fósforos
+## Truco: matchsticks
 
-- **Fondo:** mesa de noche, de `#221A15` a `#17120F`. Siempre oscuro.
-- **Fósforos:** palo `#E8CF9C` con borde `#B99560` y cabeza `#C23B22`. Cada grupo de cinco forma un cuadrado (izquierda, arriba, derecha, abajo) más la diagonal.
-- **Layout:** dos columnas (Nosotros | Ellos). Cada una muestra el nombre, el número de tantos, los fósforos de las malas, una raya punteada y los de las buenas.
-- **Jerarquía:** el Equipo que va ganando se ve más grande y en ámbar `#F2B33D`; el otro, más chico y atenuado `#A8998A`.
-- **Display:** **Bevan** para nombres, números y el botón +1.
-- **Interacción:** tocar la columna o el +1 suma un tanto. El − está al costado. Deshacer va en la barra de navegación. Terminar partida queda aislado al pie, en `#E8826F`.
-- **Fin:** al llegar al máximo, la pantalla se invierte (fondo claro `#F3E9D8`, texto oscuro) con "¡Ganaron …!" y el botón Revancha.
+- **Background:** night table, from `#221A15` to `#17120F`. Always dark.
+- **Matchsticks:** stick `#E8CF9C` with border `#B99560` and head `#C23B22`. Each group of five forms a square (left, top, right, bottom) plus the diagonal.
+- **Layout:** two columns (Nosotros | Ellos, i.e. Us | Them). Each shows the name, the number of points, the matchsticks of the malas, a dotted line and those of the buenas.
+- **Hierarchy:** the Team that is ahead looks larger and in amber `#F2B33D`; the other one, smaller and muted `#A8998A`.
+- **Display:** **Bevan** for names, numbers and the +1 button.
+- **Interaction:** tapping the column or the +1 adds a point. The − is on the side. Undo goes in the navigation bar. "Terminar partida" (End match) is isolated at the bottom, in `#E8826F`.
+- **End:** on reaching the maximum, the screen inverts (light background `#F3E9D8`, dark text) with "¡Ganaron …!" (They won!) and the Rematch button.
 
-## Generala: paño de casino
+## Generala: casino felt
 
-- **Fondo:** paño verde con luz cenital, de `#127049` a `#0D5A3B` y `#083D28`.
-- **Acentos:** latón `#D8B45A` para el título, el marco de la planilla, los totales y el Jugador que tira. Texto `#F4F0E2`. El latón solo va en texto grande y bordes, nunca en texto chico.
-- **Planilla:** las categorías van en filas (1 a 6 con caras de dado, Escalera, Full, Póker, Generala, Doble Generala y Total) y los Jugadores en columnas. Una línea separa la sección de números de la de juegos.
-- **Turno:** la columna del Jugador que tira se resalta con un velo de latón y el rótulo "Tira".
-- **Celdas:** vacías, con un punto tenue; Servido con una "S" en superíndice latón; Tachado como un "✕" en el color del texto `#F4F0E2` (no depende solo del color).
-- **Display:** **Abril Fatface** para el título y los totales. Los números de las celdas van en SF Rounded tabular.
-- **Interacción:** tocar una celda abre un sheet nativo con los valores posibles, la opción servida y Tachar. Al anotar, el turno pasa al Jugador siguiente. Terminar partida va en el menú "⋯".
+- **Background:** green felt with overhead light, from `#127049` to `#0D5A3B` and `#083D28`.
+- **Accents:** brass `#D8B45A` for the title, the Scoresheet frame, the totals and the Player who is rolling. Text `#F4F0E2`. Brass is used only on large text and borders, never on small text.
+- **Scoresheet:** categories go in rows (ones to sixes with die faces, Straight, Full house, Four of a kind, Generala, Double Generala and Total) and Players in columns. A line separates the numbers section from the combinations section.
+- **Turn:** the column of the Player who is rolling is highlighted with a brass veil and the label "Tira" (Rolls).
+- **Cells:** empty, with a faint dot; Served with a brass superscript "S"; Scratched as an "✕" in the text color `#F4F0E2` (it does not depend on color alone).
+- **Display:** **Abril Fatface** for the title and the totals. The numbers in the cells use tabular SF Rounded.
+- **Interaction:** tapping a cell opens a native sheet with the possible values, the served option and "Tachar" (Scratch). On scoring, the Turn passes to the next Player. "Terminar partida" is in the "⋯" menu.
 
-## Burako: fichas sobre la mesa
+## Burako: tiles on the table
 
-- **Fondo:** mesa verde petróleo, de `#123B40` a `#0C2C30`. Texto `#EAF2F0`, secundario `#9DB9B6` y acción `#F2C14E`.
-- **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y ámbar `#946409` (el amarillo `#D9930D` del prototipo oscurecido sin cambiar el tono hasta pasar 4.5:1 sobre el marfil: da 4.6:1). Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
-- **Display:** **Alfa Slab One** para fichas y títulos.
-- **Pantalla de Partida (carrera):** un atril por Participante (Jugador o Equipo) con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N". Terminar partida va en el menú "⋯".
-- **Anotar mano (calculadora):** pantalla con el total de cada Participante en miniatura y un segmented control con sus nombres. Incluye steppers para canastas limpias y sucias, campos numéricos para las fichas en mesa y en mano, y switches para Cerró y Tomó el muerto. Muestra el resultado de la mano en fichas y en cuánto quedaría el Participante. Los valores están en `docs/SPEC.md`.
+- **Background:** petrol-green table, from `#123B40` to `#0C2C30`. Text `#EAF2F0`, secondary `#9DB9B6` and action `#F2C14E`.
+- **Tiles:** ivory `#F7F2E6` with edge `#D9CFB8`. The numbers come in the four tile colors: red `#C62828`, blue `#1E5BB8`, black `#1F1F1F` and amber `#946409` (the prototype's yellow `#D9930D` darkened without changing the hue until it passes 4.5:1 on the ivory: it gives 4.6:1). Total scores are written with tiles, one digit per tile, alternating colors.
+- **Display:** **Alfa Slab One** for tiles and titles.
+- **Match screen (race):** one rack per Participant (Player or Team) with the total in tiles and a progress bar toward the Target score ("faltan N", N to go). Below, the Hands played as chips. Main button: "Anotar mano N" (Score hand N). "Terminar partida" is in the "⋯" menu.
+- **Score hand (calculator):** a screen with each Participant's total in miniature and a segmented control with their names. It includes steppers for clean and dirty canastas, numeric fields for the Tiles melded and Tiles in hand, and switches for "Cerró" (Went out) and "Tomó el muerto" (Took the Muerto). It shows the result of the Hand in tiles and what the Participant's total would become. The values are in `docs/SPEC.md`.
 
-## Ícono
+## Icon
 
-**Puñado de porotos:** cuatro porotos sueltos (dos colorados `#8E2A23`, uno negro `#2B211C` y uno dorado `#C9A15A`) sobre un fondo claro `#F6EBDD`.
+**Handful of beans:** four loose beans (two red `#8E2A23`, one black `#2B211C` and one golden `#C9A15A`) on a light background `#F6EBDD`.
 
-## Reglas comunes
+## Common rules
 
-- Objetivos táctiles de al menos 44 pt. El +1 y la acción principal ocupan todo el ancho del pulgar en la parte baja de la pantalla.
-- Las acciones destructivas (Terminar partida) quedan separadas de las de sumar.
-- Las fuentes de display (Shrikhand, Bevan, Abril Fatface y Alfa Slab One) van incluidas en la app y solo se usan en momentos de display. Todo el texto de UI usa SF con Dynamic Type.
-- Los valores de puntaje del prototipo no son la referencia: las reglas de cada Juego están en `docs/SPEC.md`.
+- Touch targets of at least 44 pt. The +1 and the main action take the full width of the thumb at the bottom of the screen.
+- Destructive actions ("Terminar partida") are kept apart from the scoring ones.
+- The display fonts (Shrikhand, Bevan, Abril Fatface and Alfa Slab One) are bundled in the app and used only in display moments. All UI text uses SF with Dynamic Type.
+- The prototype's score values are not the reference: each Game's rules are in `docs/SPEC.md`.
 
-## Accesibilidad y uso en la mesa
+## Accessibility and use at the table
 
-Decidido en [Accesibilidad y uso en la mesa](https://github.com/facundocapua/scores-app/issues/11).
+Decided in [Accessibility and use at the table](https://github.com/facundocapua/scores-app/issues/11).
 
-- **Contraste:** WCAG AA. 4.5:1 para texto chico y 3:1 para texto grande y gráficos. Sin variante propia para Aumentar contraste.
-- **Modo claro:** el shell sigue el modo del sistema. Los mundos de Juego son siempre oscuros (el fin de Truco se invierte igual).
-- **Dynamic Type:** el shell y las pantallas de texto escalan sin límite. Los números de display de los mundos (el total de Truco, las fichas de Burako) no escalan. La planilla de Generala escala hasta xxxLarge; desde AX1, la columna de categorías queda fija y las columnas de Jugadores se desplazan en horizontal.
-- **VoiceOver:** soporte completo. Los fósforos se leen como "Nosotros, 17, buenas 2" y son ajustables (deslizar arriba o abajo suma o resta un tanto). Las celdas se leen como "Ana, Full, 30, servido". Los totales en fichas se leen como número ("1.240, faltan 1.760").
-- **Pantalla encendida:** automática mientras hay una Partida abierta en primer plano, sin opción. En el shell, el Historial y la pantalla de fin vuelve al comportamiento normal.
-- **Orientación:** solo vertical.
-- **Una mano:** las acciones frecuentes van en los dos tercios de abajo. Deshacer queda en la barra de navegación. Sin gestos ocultos (nada de agitar para deshacer).
-- **Hápticos:** un toque liviano por cada tanto o celda anotada, uno de éxito al terminar y uno de advertencia al deshacer. Respetan el ajuste del sistema, sin interruptor propio.
-- **Reducir movimiento:** las animaciones (el fósforo, las fichas, la inversión del fin) pasan a ser fundidos cortos.
+- **Contrast:** WCAG AA. 4.5:1 for small text and 3:1 for large text and graphics. No dedicated variant for Increase Contrast.
+- **Light mode:** the shell follows the system mode. Game worlds are always dark (the Truco end screen inverts anyway).
+- **Dynamic Type:** the shell and the text screens scale without limit. The display numbers of the worlds (the Truco total, the Burako tiles) do not scale. The Generala Scoresheet scales up to xxxLarge; from AX1, the category column stays fixed and the Player columns scroll horizontally.
+- **VoiceOver:** full support. The matchsticks are read as "Nosotros, 17, buenas 2" (Us, 17, buenas 2) and are adjustable (swiping up or down adds or subtracts a point). Cells are read as "Ana, Full, 30, servido" (Ana, Full house, 30, served). Totals in tiles are read as a number ("1.240, faltan 1.760", 1,240, 1,760 to go).
+- **Screen on:** automatic while a Match is open in the foreground, with no option. In the shell, the History and the end screen, normal behavior returns.
+- **Orientation:** portrait only.
+- **One hand:** frequent actions go in the bottom two thirds. Undo stays in the navigation bar. No hidden gestures (no shake to undo).
+- **Haptics:** a light tap for each point or cell scored, a success one on finishing and a warning one on undoing. They respect the system setting, with no switch of their own.
+- **Reduce Motion:** animations (the matchstick, the tiles, the end inversion) become short fades.

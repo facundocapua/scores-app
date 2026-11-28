@@ -8,56 +8,56 @@ ios
 
 ## Stack
 
-SwiftUI + SwiftData, iOS 17+, solo iPhone. Offline, sin backend ni cuentas.
+SwiftUI + SwiftData, iOS 17+, iPhone only. Offline, no backend, no accounts.
 
 ## Users
 
-Grupos de amigos y familias argentinas que juegan Generala, Burako o Truco en la mesa (asados, juntadas, sobremesas, a menudo de noche). Una persona hace de **anotador**: tiene el teléfono en la mano o apoyado en la mesa y anota mientras juega y conversa. El resto mira la pantalla de vez en cuando para ver cómo va la Partida.
+Groups of Argentine friends and families who play Generala, Burako or Truco at the table (barbecues, get-togethers, after-dinner conversations, often at night). One person acts as the **scorekeeper**: holding the phone or leaving it on the table and scoring while playing and chatting. Everyone else glances at the screen now and then to see how the Match is going.
 
 ## Product Purpose
 
-Reemplazar el papel y la birome (o los porotos y los fósforos) para llevar la cuenta de Generala, Burako y Truco. Tiene éxito cuando el anotador anota cada Mano en segundos, sin errores y sin dejar de prestarle atención a la mesa, y cuando al final de la Partida queda claro quién ganó.
+Replace pen and paper (or the beans and the matchsticks) for keeping score in Generala, Burako and Truco. It succeeds when the scorekeeper enters each Hand in seconds, without mistakes and without taking attention away from the table, and when it is clear who won at the end of the Match.
 
 ## Positioning
 
-- **Reglas argentinas reales**: la Variante estándar argentina de cada Juego y su vocabulario local (malas y buenas, servido, tachar), no reglas genéricas traducidas.
-- **Cero fricción**: abrir y anotar en segundos. Gratis, sin cuentas, sin anuncios, sin compras dentro de la app y sin internet.
-- **Recuerda a la barra**: Jugadores guardados y reutilizables, más un Historial de las Partidas con la gente de siempre.
+- **Real Argentine rules**: the standard Argentine Variant of each Game and its local vocabulary (malas and buenas, servido, tachar), not translated generic rules.
+- **Zero friction**: open and score in seconds. Free, no accounts, no ads, no in-app purchases and no internet.
+- **Remembers the crew**: saved, reusable Players, plus a History of Matches with the usual people.
 
 ## Operating Context
 
-- Se usa en la mesa, con una mano y entre jugada y jugada, a veces con poca luz.
-- Truco: un anotador lleva los tantos de dos Equipos con fósforos (malas y buenas). No se registra cada canto.
-- Generala: Planilla clásica con Jugadores en columnas, Servido y Tachar.
-- Burako: anotación por Mano, individual o en parejas.
-- Glosario del dominio: `GLOSSARY.md`.
+- Used at the table, with one hand and between plays, sometimes in low light.
+- Truco: one scorekeeper tracks the points of two Teams with Matchsticks (malas and buenas). Each call is not recorded.
+- Generala: classic Scoresheet with Players in columns, Served and Scratch.
+- Burako: scoring per Hand, individual or in pairs.
+- Domain glossary: `GLOSSARY.md`.
 
 ## Capabilities and Constraints
 
-- MVP: Partida en curso, Historial simple y Jugadores guardados.
-- Toda la app en español, con tono rioplatense y cálido.
-- El modelo tiene que permitir agregar más Juegos después.
-- Distribución: TestFlight para el MVP y App Store más adelante.
-- Fuera de alcance: estadísticas, sincronización con iCloud, iPad, Apple Watch y otros Juegos.
-- Las reglas de los tres Juegos, el modelo y las pantallas están cerrados en `docs/SPEC.md`.
+- MVP: Match in progress, a simple History and saved Players.
+- The whole app is in Spanish, with a warm Rioplatense tone.
+- The model must allow adding more Games later.
+- Distribution: TestFlight for the MVP and the App Store later.
+- Out of scope: statistics, iCloud sync, iPad, Apple Watch and other Games.
+- The rules of the three Games, the model and the screens are settled in `docs/SPEC.md`.
 
 ## Brand Commitments
 
-- Nombre: **Porotos**. Subtítulo en la App Store: "Anotador de juegos de mesa". Bundle ID: `com.facundocapua.porotos`.
-- "Porotos" alude a los porotos que se usan en Argentina para contar los tantos.
-- No hay assets visuales previos ni restricciones visuales.
+- Name: **Porotos**. App Store subtitle: "Anotador de juegos de mesa" (board-game scorekeeper). Bundle ID: `com.facundocapua.porotos`.
+- "Porotos" (beans) alludes to the beans used in Argentina to count points.
+- There are no previous visual assets or visual constraints.
 
 ## Evidence on Hand
 
-Ninguna todavía. No hay usuarios, testimonios ni capturas. No hay que inventarlos.
+None yet. There are no users, testimonials or screenshots. They must not be invented.
 
 ## Product Principles
 
-1. **La mesa primero**: el anotador mira la pantalla un segundo y vuelve a la conversación.
-2. **Hablar como en la mesa**: usar los términos que la gente ya dice, no jerga de app.
-3. **Nada entre abrir y anotar**: ni cuentas, ni avisos, ni pasos que se puedan evitar.
-4. **Cada Juego con su forma**: cada Juego se anota de la forma propia, no con una tabla genérica para todos.
+1. **The table first**: the scorekeeper looks at the screen for a second and goes back to the conversation.
+2. **Talk like at the table**: use the terms people already say, not app jargon.
+3. **Nothing between opening and scoring**: no accounts, no notices, no avoidable steps.
+4. **Each Game in its own way**: each Game is scored in its own way, not with a generic table for all of them.
 
 ## Accessibility & Inclusion
 
-Se lee a distancia de brazo y con poca luz, y se usa con una mano. WCAG AA, Dynamic Type, VoiceOver completo y mundos de Juego siempre oscuros. El detalle está en `DESIGN.md`.
+Readable at arm's length and in low light, and usable with one hand. WCAG AA, Dynamic Type, full VoiceOver and always-dark Game worlds. Details are in `DESIGN.md`.
