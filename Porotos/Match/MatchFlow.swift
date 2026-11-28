@@ -65,8 +65,30 @@ struct MatchFlowView: View {
                 onDiscard: { onDiscard(match) }
             )
             .id(match.id)
+        case .newMatch(.generala):
+            GeneralaNewMatchView(
+                setup: (try? RememberedSetup.last(Generala.self, in: context))
+                    ?? MatchSetup(variant: Generala.standardVariant, participants: Generala.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .rematchSetup(let finished) where finished.kind == .generala:
+            GeneralaNewMatchView(
+                setup: (try? finished.rematchSetup(Generala.self))
+                    ?? MatchSetup(variant: Generala.standardVariant, participants: Generala.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .playing(let match) where match.kind == .generala:
+            GeneralaMatchView(
+                match: match,
+                onRematch: { rematch(match, Generala.self) },
+                onHome: onClose,
+                onDiscard: { onDiscard(match) }
+            )
+            .id(match.id)
         default:
-            // Generala and Burako arrive in their own slices: their cards are disabled for now.
+            // Burako arrives in its own slice: its card is disabled for now.
             Color.clear.onAppear(perform: onClose)
         }
     }
