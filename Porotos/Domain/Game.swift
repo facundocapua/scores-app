@@ -70,6 +70,20 @@ struct Outcome: Equatable, Sendable {
         Outcome(scores: scores, isFinished: false, winners: [])
     }
 
+    /// Each Participant's position, best first, for the end screen and the History (SPEC §5.4,
+    /// §5.5). Ties share the position and the next one skips: scores [30, 50, 50, 10] give
+    /// [3, 1, 1, 4]. Pass `lowerIsBetter` for Games where the lowest score wins.
+    func positions(lowerIsBetter: Bool = false) -> [Int] {
+        scores.map { score in
+            1 + scores.filter { lowerIsBetter ? $0 < score : $0 > score }.count
+        }
+    }
+
+    /// "1.º", "2.º"…
+    static func ordinal(_ position: Int) -> String {
+        "\(position).º"
+    }
+
     /// The Participants in the lead: everyone with the highest score.
     static func leaders(_ scores: [Int]) -> [Int] {
         guard let highest = scores.max() else { return [] }

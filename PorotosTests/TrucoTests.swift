@@ -217,3 +217,12 @@ struct TrucoMatchTests {
         #expect(try match.outcome(Truco.self).scores == [1, 0])
     }
 }
+
+struct OutcomePositionsTests {
+    @Test func tiesShareThePositionAndTheNextOneSkips() {
+        let outcome = Outcome(scores: [30, 50, 50, 10], isFinished: true, winners: [1, 2])
+        #expect(outcome.positions() == [3, 1, 1, 4])
+        #expect(outcome.positions(lowerIsBetter: true) == [2, 3, 3, 1])
+        #expect(Outcome.ordinal(1) == "1.º")
+    }
+}
