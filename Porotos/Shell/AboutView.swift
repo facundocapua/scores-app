@@ -32,7 +32,16 @@ struct AboutView: View {
                     }
                     if let url = info.mailtoURL {
                         Link(destination: url) {
-                            LabeledContent("Contacto", value: info.supportEmail)
+                            // Stacked, so the address wraps instead of truncating at large sizes.
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text("Contacto")
+                                Text(info.supportEmail)
+                                    .font(.subheadline)
+                                    // Not .secondary: the audit measures it below 4.5:1 over the row.
+                                    .foregroundStyle(Color.primary)
+                                    .fixedSize(horizontal: false, vertical: true)
+                            }
+                            .accessibilityElement(children: .combine)
                         }
                     }
                 } footer: {

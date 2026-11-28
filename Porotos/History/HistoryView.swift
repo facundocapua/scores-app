@@ -48,6 +48,8 @@ struct HistoryView: View {
             } actions: {
                 Button("Empezar una", action: onStartOne)
                     .buttonStyle(.borderedProminent)
+                    // The red fill carries light text in both modes (the dark-mode brand tint is for text).
+                    .tint(Color.brandFill)
             }
         } else if months.isEmpty {
             ContentUnavailableView(
@@ -144,7 +146,7 @@ struct HistoryRow: View {
             summary
                 .font(.headline)
             if entry.isTie || entry.endedEarly {
-                HStack(spacing: 6) {
+                FlowLayout(spacing: 6) {
                     if entry.isTie { HistoryLabel(text: "Empate") }
                     if entry.endedEarly { HistoryLabel(text: "Terminada antes") }
                 }
@@ -165,6 +167,6 @@ struct HistoryLabel: View {
             .foregroundStyle(.secondary)
             .padding(.horizontal, 8)
             .padding(.vertical, 2)
-            .background(.quaternary, in: Capsule())
+            .background(.quaternary, in: RoundedRectangle(cornerRadius: 10))
     }
 }

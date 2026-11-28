@@ -144,6 +144,7 @@ struct TrucoMatchView: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(name)
         .accessibilityValue(tally.spokenValue(score: score, variant: variant))
+        .accessibilityHint("Deslizá hacia arriba para sumar un punto o hacia abajo para restar")
         .accessibilityAdjustableAction { direction in
             switch direction {
             case .increment: add(1, to: team, score: score)
@@ -157,6 +158,8 @@ struct TrucoMatchView: View {
         Text(text.uppercased())
             .font(.caption2.weight(.medium))
             .tracking(1.2)
+            // Capped, so the labels don't push the matchsticks off the column at AX5.
+            .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
             .foregroundStyle(TrucoWorld.dim)
             .padding(.vertical, 3)
             .accessibilityHidden(true)
@@ -209,6 +212,9 @@ struct TrucoMatchView: View {
                 Text("Truco a \(variant.target)")
                     .font(.headline)
                     .foregroundStyle(TrucoWorld.ink)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
+                    .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
             }
         }
         ToolbarItemGroup(placement: .topBarTrailing) {
@@ -254,7 +260,7 @@ private struct Line: Shape {
 /// The Truco end (SPEC §5.4): the screen inverts, with "¡Ganaron …!", the final score,
 /// "Revancha" and "Inicio". Undo stays in the navigation bar.
 struct TrucoEndView: View {
-    static let paper = Color(hex: 0xF3E9D8)
+    static let paper = TrucoWorld.paper
 
     var names: [String]
     var outcome: Outcome

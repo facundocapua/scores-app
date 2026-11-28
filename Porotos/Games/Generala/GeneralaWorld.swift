@@ -8,7 +8,7 @@ enum GeneralaWorld {
     static let feltDark = Color(hex: 0x083D28)
     static let brass = Color(hex: 0xD8B45A)
     static let ink = Color(hex: 0xF4F0E2)
-    static let dim = Color(hex: 0xA9C7B5)
+    static let dim = Color(hex: 0xD2E6DA)
     static let end = Color(hex: 0xF0948A)
 
     /// Green felt with an overhead light.

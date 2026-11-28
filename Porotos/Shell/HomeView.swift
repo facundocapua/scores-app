@@ -106,6 +106,8 @@ struct InProgressRow: View {
     var match: Match
     var onContinue: () -> Void
 
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     private var summary: String {
         let names = match.orderedParticipants.map(\.name)
         guard let rules = GameCatalog.rules(for: match.kind),
@@ -115,7 +117,11 @@ struct InProgressRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
+        // At accessibility sizes the button goes below the text, so neither is squeezed.
+        let layout = dynamicTypeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 12))
+            : AnyLayout(HStackLayout(spacing: 12))
+        layout {
             VStack(alignment: .leading, spacing: 2) {
                 Text(match.kind.displayName)
                     .font(.footnote)
@@ -130,8 +136,8 @@ struct InProgressRow: View {
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(Color.onBrand)
                     .padding(.horizontal, 16)
-                    .frame(minHeight: 44)
-                    .background(Color.brand, in: Capsule())
+                    .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, minHeight: 44)
+                    .background(Color.brandFill, in: Capsule())
             }
             .buttonStyle(.plain)
         }
@@ -163,7 +169,8 @@ struct GameCard: View {
                         .foregroundStyle(titleColor)
                     Text(tagline)
                         .font(.footnote)
-                        .opacity(0.85)
+                        // On the lightest felt, 85% ink falls to 4.3:1, so Generala keeps full ink.
+                        .opacity(kind == .generala ? 1 : 0.85)
                 }
                 .foregroundStyle(ink)
                 .padding(.horizontal, 18)
@@ -194,14 +201,14 @@ struct GameCard: View {
     }
 
     private var titleColor: Color {
-        kind == .generala ? Color(hex: 0xD8B45A) : ink
+        kind == .generala ? GeneralaWorld.brass : ink
     }
 
     private var ink: Color {
         switch kind {
         case .truco: TrucoWorld.ink
-        case .generala: Color(hex: 0xF4F0E2)
-        case .burako: Color(hex: 0xEAF2F0)
+        case .generala: GeneralaWorld.ink
+        case .burako: BurakoWorld.ink
         }
     }
 
@@ -209,8 +216,8 @@ struct GameCard: View {
         switch kind {
         case .truco: TrucoWorld.ground
         case .generala:
-            RadialGradient(colors: [Color(hex: 0x11704A), Color(hex: 0x083D28)], center: UnitPoint(x: 0.3, y: 0.2), startRadius: 0, endRadius: 400)
-        case .burako: Color(hex: 0x123B40)
+            RadialGradient(colors: [GeneralaWorld.feltLight, GeneralaWorld.feltDark], center: UnitPoint(x: 0.3, y: 0.2), startRadius: 0, endRadius: 400)
+        case .burako: BurakoWorld.ground
         }
     }
 

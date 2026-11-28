@@ -57,7 +57,7 @@ struct MatchDetailView: View {
                     .font(.headline)
                     .foregroundStyle(Color.onBrand)
                     .frame(maxWidth: .infinity, minHeight: 54)
-                    .background(Color.brand, in: RoundedRectangle(cornerRadius: 16))
+                    .background(Color.brandFill, in: RoundedRectangle(cornerRadius: 16))
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 16)

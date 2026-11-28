@@ -45,7 +45,7 @@ private struct SheetGrid: View {
     @ScaledMetric(relativeTo: .body) private var headerHeight: CGFloat = 58
     @ScaledMetric(relativeTo: .body) private var totalHeight: CGFloat = 56
     @ScaledMetric(relativeTo: .body) private var categoryWidth: CGFloat = 100
-    @ScaledMetric(relativeTo: .body) private var minColumnWidth: CGFloat = 42
+    @ScaledMetric(relativeTo: .body) private var minColumnWidth: CGFloat = 44
     @ScaledMetric(relativeTo: .body) private var scrollColumnWidth: CGFloat = 72
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -128,7 +128,7 @@ private struct SheetGrid: View {
                     .overlay(alignment: .bottom) { rule(heavy: category == .sixes) }
             }
             Text("Total")
-                .font(DisplayFont.abrilFatface.scaled(17, relativeTo: .headline))
+                .font(DisplayFont.abrilFatface.scaled(18, relativeTo: .headline))
                 .foregroundStyle(GeneralaWorld.brass)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 12)

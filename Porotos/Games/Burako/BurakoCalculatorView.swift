@@ -209,14 +209,27 @@ struct BurakoCalculatorView: View {
 
     private var canastasSection: some View {
         Section {
-            Stepper(value: binding(\.cleanCanastas), in: 0...20) {
-                stepperLabel("Canastas limpias", value: line.cleanCanastas, worth: Burako.Line.cleanCanastaValue)
-            }
-            Stepper(value: binding(\.dirtyCanastas), in: 0...20) {
-                stepperLabel("Canastas sucias", value: line.dirtyCanastas, worth: Burako.Line.dirtyCanastaValue)
-            }
+            counter("Canastas limpias", value: line.cleanCanastas, worth: Burako.Line.cleanCanastaValue, binding: binding(\.cleanCanastas))
+            counter("Canastas sucias", value: line.dirtyCanastas, worth: Burako.Line.dirtyCanastaValue, binding: binding(\.dirtyCanastas))
         }
         .listRowBackground(BurakoWorld.surface)
+    }
+
+    /// A Stepper with its label. At accessibility sizes the control goes below the label, so
+    /// the title doesn't wrap into a narrow column.
+    @ViewBuilder private func counter(_ title: String, value: Int, worth: Int, binding: Binding<Int>) -> some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: 8) {
+                stepperLabel(title, value: value, worth: worth)
+                    .accessibilityHidden(true)
+                Stepper(title, value: binding, in: 0...20)
+                    .labelsHidden()
+            }
+        } else {
+            Stepper(value: binding, in: 0...20) {
+                stepperLabel(title, value: value, worth: worth)
+            }
+        }
     }
 
     private func stepperLabel(_ title: String, value: Int, worth: Int) -> some View {
@@ -259,7 +272,7 @@ struct BurakoCalculatorView: View {
                     let digits = text.filter(\.isNumber).prefix(5)
                     value.wrappedValue = Int(digits) ?? 0
                 }
-            ))
+            ), prompt: Text("0").foregroundStyle(BurakoWorld.dim))
             .keyboardType(.numberPad)
             .multilineTextAlignment(.trailing)
             .font(.title3.weight(.semibold))

@@ -49,7 +49,7 @@ struct BurakoDetailsSheet: View {
                             .onSubmit(applyOther)
                             .accessibilityLabel("Meta")
                         if !Burako.Variant.presets.contains(variant.target) {
-                            Image(systemName: "checkmark").foregroundStyle(Color.accentColor)
+                            Image(systemName: "checkmark").foregroundStyle(Color.accentColor).accessibilityHidden(true)
                         }
                     }
                     .frame(minHeight: 44)
@@ -121,6 +121,7 @@ struct BurakoDetailsSheet: View {
                 if isSelected {
                     Image(systemName: "checkmark")
                         .foregroundStyle(Color.accentColor)
+                        .accessibilityHidden(true)
                 }
             }
             .frame(minHeight: 44)

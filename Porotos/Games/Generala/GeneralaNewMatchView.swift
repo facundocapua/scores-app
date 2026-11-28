@@ -60,6 +60,8 @@ struct GeneralaNewMatchView: View {
                         .frame(maxWidth: .infinity, minHeight: 44)
                 }
                 .buttonStyle(.borderedProminent)
+                // The red fill carries light text in both modes (the dark-mode brand tint is for text).
+                .tint(Color.brandFill)
                 .controlSize(.large)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 8)
