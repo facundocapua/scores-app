@@ -40,6 +40,23 @@ protocol GameRules {
 
     /// Scores, end and Winners according to the rules, ignoring Ended early.
     static func outcome(variant: Variant, participantCount: Int, entries: [Entry]) -> Outcome
+
+    /// The name a Team goes back to when its name is cleared (SPEC §3.3). By default, the one
+    /// proposed the first time.
+    static func defaultTeamName(at index: Int, players: [String]) -> String
+}
+
+extension GameRules {
+    static func defaultTeamName(at index: Int, players: [String]) -> String {
+        guard initialParticipants.indices.contains(index) else { return "" }
+        return initialParticipants[index].teamName ?? ""
+    }
+
+    /// A Variant can be chosen mid-Match only if it doesn't end the Match on the spot
+    /// (SPEC §6.4): for example, Truco to 15 when a Team already has 15 or more.
+    static func allows(_ variant: Variant, participantCount: Int, entries: [Entry]) -> Bool {
+        !outcome(variant: variant, participantCount: participantCount, entries: entries).isFinished
+    }
 }
 
 /// What is computed from a Match. Participants are identified by their position.
