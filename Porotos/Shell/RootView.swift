@@ -52,16 +52,6 @@ struct HistoryView: View {
     }
 }
 
-/// Players (SPEC §5.6). For now, only the empty state.
-struct PlayersView: View {
-    var body: some View {
-        NavigationStack {
-            ContentUnavailableView("Acá va a estar la barra", systemImage: "person.2")
-                .navigationTitle("Jugadores")
-        }
-    }
-}
-
 #Preview {
     RootView()
         .modelContainer(try! Store.container(inMemory: true))
