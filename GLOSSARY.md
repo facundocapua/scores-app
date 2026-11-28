@@ -18,6 +18,8 @@ Domain language of the board-game scorekeeper app. Terms only, no implementation
 
 **Team** (UI: *Equipo*): A Participant that groups Players under its own name (always in Truco; in Burako when played in pairs, with exactly two Players). It exists only within its Match.
 
+**Seat**: A Player's place within a Participant (one per Player in a Team, or the single Player of an individual Participant). If the Player is deleted, the Seat keeps the last name they had, so the Match still shows it. Code-only term: the UI never names it.
+
 **Variant** (UI: *Variante*): A set of rule options chosen when creating a Match (for example, Truco to 15 or to 30). Each Game has a standard Argentine Variant. A new Match proposes the Variant and the Participants of the last Match of that Game.
 
 **History** (UI: *Historial*): The list of Finished Matches.
