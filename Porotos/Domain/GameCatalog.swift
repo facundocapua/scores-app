@@ -6,7 +6,8 @@ enum GameCatalog {
     static func rules(for kind: GameKind) -> (any GameRules.Type)? {
         switch kind {
         case .truco: Truco.self
-        case .generala, .burako: nil
+        case .generala: Generala.self
+        case .burako: nil
         }
     }
 }
