@@ -14,7 +14,6 @@ struct HomeView: View {
     )
     private var inProgress: [Match]
     @State private var flow: MatchFlowStart?
-    @State private var pendingDiscard: Match?
 
     var body: some View {
         NavigationStack {
@@ -49,22 +48,7 @@ struct HomeView: View {
                 }
             }
         }
-        .fullScreenCover(item: $flow, onDismiss: deletePendingDiscard) { start in
-            MatchFlowView(
-                start: start,
-                onClose: { flow = nil },
-                onDiscard: { match in
-                    pendingDiscard = match
-                    flow = nil
-                }
-            )
-        }
-    }
-
-    private func deletePendingDiscard() {
-        guard let match = pendingDiscard else { return }
-        pendingDiscard = nil
-        try? match.delete()
+        .matchFlowCover($flow)
     }
 }
 

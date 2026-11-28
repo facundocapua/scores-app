@@ -5,11 +5,15 @@ import SwiftUI
 enum MatchFlowStart: Identifiable {
     case newMatch(GameKind)
     case open(Match)
+    /// The New Match screen with the setup of a finished Match, when its Rematch can't start
+    /// directly ("Jugar de nuevo" in History).
+    case rematchSetup(Match)
 
     var id: String {
         switch self {
         case .newMatch(let kind): "new-\(kind.rawValue)"
         case .open(let match): "match-\(match.id)"
+        case .rematchSetup(let match): "rematch-\(match.id)"
         }
     }
 }
@@ -38,6 +42,7 @@ struct MatchFlowView: View {
         switch start {
         case .newMatch(let kind): _stage = State(initialValue: .newMatch(kind))
         case .open(let match): _stage = State(initialValue: .playing(match))
+        case .rematchSetup(let match): _stage = State(initialValue: .rematchSetup(match))
         }
     }
 
