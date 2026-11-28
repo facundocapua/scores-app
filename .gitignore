@@ -5,6 +5,7 @@ Porotos/App/Info.plist
 xcuserdata/
 DerivedData/
 build/
+build-*/
 .DS_Store
 
 # Claude Code agent worktrees
