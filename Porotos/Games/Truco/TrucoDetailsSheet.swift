@@ -28,6 +28,7 @@ struct TrucoDetailsSheet: View {
                                 if option == variant {
                                     Image(systemName: "checkmark")
                                         .foregroundStyle(Color.accentColor)
+                                        .accessibilityHidden(true)
                                 }
                             }
                         }

@@ -12,6 +12,8 @@ enum TrucoWorld {
     static let dim = Color(hex: 0xA8998A)
     static let accent = Color(hex: 0xF2B33D)
     static let end = Color(hex: 0xE8826F)
+    /// The inverted end screen background.
+    static let paper = Color(hex: 0xF3E9D8)
 
     static var background: some View {
         RadialGradient(

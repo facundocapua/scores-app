@@ -29,10 +29,17 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
         INFOPLIST_KEY_UIRequiresFullScreen: YES
         INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+        # Public contact and pages (SPEC §9). The email is a placeholder: a human picks the real one.
+        SUPPORT_EMAIL: soporte@porotos.app
+        PRIVACY_URL: https://facundocapua.github.io/scores-app/privacidad/
+        SUPPORT_URL: https://facundocapua.github.io/scores-app/soporte/
     info:
       path: Porotos/App/Info.plist
       properties:
         CFBundleDevelopmentRegion: es
+        PorotosSupportEmail: $(SUPPORT_EMAIL)
+        PorotosPrivacyURL: $(PRIVACY_URL)
+        PorotosSupportURL: $(SUPPORT_URL)
         UIAppFonts:
           - Shrikhand-Regular.ttf
           - Bevan-Regular.ttf

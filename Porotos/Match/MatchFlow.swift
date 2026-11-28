@@ -5,11 +5,15 @@ import SwiftUI
 enum MatchFlowStart: Identifiable {
     case newMatch(GameKind)
     case open(Match)
+    /// The New Match screen with the setup of a finished Match, when its Rematch can't start
+    /// directly ("Jugar de nuevo" in History).
+    case rematchSetup(Match)
 
     var id: String {
         switch self {
         case .newMatch(let kind): "new-\(kind.rawValue)"
         case .open(let match): "match-\(match.id)"
+        case .rematchSetup(let match): "rematch-\(match.id)"
         }
     }
 }
@@ -38,6 +42,7 @@ struct MatchFlowView: View {
         switch start {
         case .newMatch(let kind): _stage = State(initialValue: .newMatch(kind))
         case .open(let match): _stage = State(initialValue: .playing(match))
+        case .rematchSetup(let match): _stage = State(initialValue: .rematchSetup(match))
         }
     }
 
@@ -65,8 +70,52 @@ struct MatchFlowView: View {
                 onDiscard: { onDiscard(match) }
             )
             .id(match.id)
+        case .newMatch(.generala):
+            GeneralaNewMatchView(
+                setup: (try? RememberedSetup.last(Generala.self, in: context))
+                    ?? MatchSetup(variant: Generala.standardVariant, participants: Generala.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .rematchSetup(let finished) where finished.kind == .generala:
+            GeneralaNewMatchView(
+                setup: (try? finished.rematchSetup(Generala.self))
+                    ?? MatchSetup(variant: Generala.standardVariant, participants: Generala.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .playing(let match) where match.kind == .generala:
+            GeneralaMatchView(
+                match: match,
+                onRematch: { rematch(match, Generala.self) },
+                onHome: onClose,
+                onDiscard: { onDiscard(match) }
+            )
+            .id(match.id)
+        case .newMatch(.burako):
+            BurakoNewMatchView(
+                setup: (try? RememberedSetup.last(Burako.self, in: context))
+                    ?? MatchSetup(variant: Burako.standardVariant, participants: Burako.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .rematchSetup(let finished) where finished.kind == .burako:
+            BurakoNewMatchView(
+                setup: (try? finished.rematchSetup(Burako.self))
+                    ?? MatchSetup(variant: Burako.standardVariant, participants: Burako.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .playing(let match) where match.kind == .burako:
+            BurakoMatchView(
+                match: match,
+                onRematch: { rematch(match, Burako.self) },
+                onHome: onClose,
+                onDiscard: { onDiscard(match) }
+            )
+            .id(match.id)
         default:
-            // Generala and Burako arrive in their own slices: their cards are disabled for now.
+            // Every Game is registered, so this is unreachable.
             Color.clear.onAppear(perform: onClose)
         }
     }

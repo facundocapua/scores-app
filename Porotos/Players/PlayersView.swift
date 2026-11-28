@@ -20,6 +20,8 @@ struct PlayersView: View {
                     } actions: {
                         Button("Agregar jugador") { editing = .add }
                             .buttonStyle(.borderedProminent)
+                            // The red fill carries light text in both modes (the dark-mode brand tint is for text).
+                            .tint(Color.brandFill)
                     }
                 } else {
                     List(sorted) { player in

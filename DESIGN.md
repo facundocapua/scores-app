@@ -10,7 +10,7 @@ Adding a new Game means defining its world with these same four elements.
 
 ## Shell (Porotos)
 
-- **Brand:** bean red `#8E2A23` as tint, with `#FFF6EE` text on top of it.
+- **Brand:** bean red `#8E2A23` as tint, with `#FFF6EE` text on top of it (7.9:1). In dark mode the tint used for text and icons lightens to `#E5857A`, because `#8E2A23` reaches only 2:1 over the dark system backgrounds. As a fill carrying `#FFF6EE` text, the red stays `#8E2A23` in both modes.
 - **Background and surfaces:** system semantic colors (`systemGroupedBackground` and `secondarySystemGroupedBackground`). Automatic light and dark mode.
 - **Wordmark:** "Porotos" in **Shrikhand**, only in the Home title. Everything else uses SF Pro with Dynamic Type.
 - **Home = game picker:** at the top, one row per In progress Match with the "Seguir" (Continue) button (up to 3, plus "Ver todas", See all); below, "Nueva partida" (New match) with one large card per Game that previews its world (matchsticks, dice on felt and tiles). The full flow is in `docs/SPEC.md`.
@@ -29,7 +29,7 @@ Adding a new Game means defining its world with these same four elements.
 ## Generala: casino felt
 
 - **Background:** green felt with overhead light, from `#127049` to `#0D5A3B` and `#083D28`.
-- **Accents:** brass `#D8B45A` for the title, the Scoresheet frame, the totals and the Player who is rolling. Text `#F4F0E2`. Brass is used only on large text and borders, never on small text.
+- **Accents:** brass `#D8B45A` for the title, the Scoresheet frame, the totals and the Player who is rolling. Text `#F4F0E2`, secondary text `#D2E6DA` (the prototype's `#A9C7B5` gave 3.4:1 under the overhead light, `#127049`; this one gives 4.7:1). Brass is used only on large text and borders, never on small text.
 - **Scoresheet:** categories go in rows (ones to sixes with die faces, Straight, Full house, Four of a kind, Generala, Double Generala and Total) and Players in columns. A line separates the numbers section from the combinations section.
 - **Turn:** the column of the Player who is rolling is highlighted with a brass veil and the label "Tira" (Rolls).
 - **Cells:** empty, with a faint dot; Served with a brass superscript "S"; Scratched as an "✕" in the text color `#F4F0E2` (it does not depend on color alone).
