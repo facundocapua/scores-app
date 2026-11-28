@@ -15,6 +15,7 @@ struct HomeView: View {
     private var inProgress: [Match]
     @State private var flow: MatchFlowStart?
     @State private var pendingDiscard: Match?
+    @State private var showingAbout = false
 
     var body: some View {
         NavigationStack {
@@ -47,8 +48,13 @@ struct HomeView: View {
                         .foregroundStyle(Color.brand)
                         .accessibilityAddTraits(.isHeader)
                 }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Acerca de Porotos", systemImage: "info.circle") { showingAbout = true }
+                        .labelStyle(.iconOnly)
+                }
             }
         }
+        .sheet(isPresented: $showingAbout) { AboutView() }
         .fullScreenCover(item: $flow, onDismiss: deletePendingDiscard) { start in
             MatchFlowView(
                 start: start,
