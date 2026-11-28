@@ -28,6 +28,9 @@ xcodebuild test -project Porotos.xcodeproj -scheme Porotos \
 
 - `Porotos/Domain`: pure logic. Each Game implements `GameRules` and registers in `GameCatalog`.
 - `Porotos/Persistence`: the SwiftData model (Match, Participant, Seat and Player) and the remembered setup.
-- `Porotos/Shell`: the native iOS shell and the tokens from `DESIGN.md`.
+- `Porotos/Shell`: the native iOS shell (Home and the tabs) and the tokens from `DESIGN.md`.
+- `Porotos/Players`: the Players tab and the reusable Player picker.
+- `Porotos/Match`: the full-screen flow shared by every Game (New Match → Match → end → Rematch).
+- `Porotos/Games/<Game>`: each Game's world and screens.
 - `Porotos/Resources`: assets and the display fonts (OFL license next to each font).
 - `PorotosTests`: Swift Testing, with test Games that exercise the shared model.

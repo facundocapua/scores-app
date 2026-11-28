@@ -15,33 +15,6 @@ struct RootView: View {
     }
 }
 
-/// Home (SPEC §5.1). For now, the wordmark and the Game cards without actions: in-progress
-/// Matches and the New Match screen arrive with the first Game.
-struct HomeView: View {
-    var body: some View {
-        NavigationStack {
-            List {
-                Section("Nueva partida") {
-                    ForEach(GameKind.allCases, id: \.self) { kind in
-                        Text(kind.displayName)
-                            .font(.title3.weight(.semibold))
-                            .padding(.vertical, 12)
-                    }
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("Porotos")
-                        .font(DisplayFont.shrikhand.scaled(28, relativeTo: .title))
-                        .foregroundStyle(Color.brand)
-                        .accessibilityAddTraits(.isHeader)
-                }
-            }
-        }
-    }
-}
-
 /// History (SPEC §5.5). For now, only the empty state.
 struct HistoryView: View {
     var body: some View {
