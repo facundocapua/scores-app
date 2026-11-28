@@ -4,7 +4,7 @@ Identidad visual de **Porotos**. Decidida en el ticket [Identidad visual con imp
 
 ## Principio
 
-**Un shell común y un mundo por Juego.** La app (inicio, Historial, Jugadores, ajustes) es iOS nativo con el color de la marca. Al entrar a una Partida, la pantalla de anotación adopta el mundo propio de su Juego. El mundo aporta fondo, paleta, tipografía de display y un gesto distintivo. La navegación y los controles son siempre los nativos de iOS (barra de navegación, sheets, steppers, switches y segmented control).
+**Un shell común y un mundo por Juego.** La app (Inicio, Historial, Jugadores y "Acerca de Porotos") es iOS nativo con el color de la marca. Al entrar a una Partida, la pantalla de anotación adopta el mundo propio de su Juego. El mundo aporta fondo, paleta, tipografía de display y un gesto distintivo. La navegación y los controles son siempre los nativos de iOS (barra de navegación, sheets, steppers, switches y segmented control).
 
 Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elementos.
 
@@ -13,7 +13,7 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 - **Marca:** poroto colorado `#8E2A23` como tint, con texto `#FFF6EE` sobre él.
 - **Fondo y superficies:** colores semánticos del sistema (`systemGroupedBackground` y `secondarySystemGroupedBackground`). Modo claro y oscuro automáticos.
 - **Wordmark:** "Porotos" en **Shrikhand**, solo en el título del inicio. Todo lo demás usa SF Pro con Dynamic Type.
-- **Inicio = selector de juego:** fila "Partida en curso" con el botón Seguir y, debajo, "Nueva partida" con una tarjeta grande por Juego que anticipa su mundo (fósforos, dados sobre paño y fichas).
+- **Inicio = selector de juego:** arriba, una fila por Partida En curso con el botón Seguir (hasta 3, más "Ver todas"); debajo, "Nueva partida" con una tarjeta grande por Juego que anticipa su mundo (fósforos, dados sobre paño y fichas). El flujo completo está en `docs/SPEC.md`.
 - **Tab bar:** Jugar · Historial · Jugadores.
 
 ## Truco: fósforos
@@ -39,10 +39,10 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 ## Burako: fichas sobre la mesa
 
 - **Fondo:** mesa verde petróleo, de `#123B40` a `#0C2C30`. Texto `#EAF2F0`, secundario `#9DB9B6` y acción `#F2C14E`.
-- **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y amarillo oscurecido a un ámbar que pase 4.5:1 sobre el marfil (el `#D9930D` original no alcanza; el tono exacto lo elige impeccable). Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
+- **Fichas:** marfil `#F7F2E6` con canto `#D9CFB8`. Los números van en los cuatro colores de las fichas: rojo `#C62828`, azul `#1E5BB8`, negro `#1F1F1F` y ámbar `#946409` (el amarillo `#D9930D` del prototipo oscurecido sin cambiar el tono hasta pasar 4.5:1 sobre el marfil: da 4.6:1). Los puntajes totales se escriben con fichas, un dígito por ficha, alternando colores.
 - **Display:** **Alfa Slab One** para fichas y títulos.
-- **Pantalla de Partida (carrera):** un atril por Equipo con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N". Terminar partida va en el menú "⋯".
-- **Anotar mano (calculadora):** pantalla con el total de cada Equipo en miniatura y un segmented control Nosotros/Ellos. Incluye steppers para canastas limpias y sucias, campos numéricos para las fichas en mesa y en mano, y switches para Cerró y Tomó el muerto. Muestra el resultado de la mano en fichas y en cuánto quedaría el Equipo. Los campos exactos dependen de las reglas de Burako.
+- **Pantalla de Partida (carrera):** un atril por Participante (Jugador o Equipo) con el total en fichas y una barra de progreso hacia la meta ("faltan N"). Debajo, las Manos jugadas como chips. Botón principal: "Anotar mano N". Terminar partida va en el menú "⋯".
+- **Anotar mano (calculadora):** pantalla con el total de cada Participante en miniatura y un segmented control con sus nombres. Incluye steppers para canastas limpias y sucias, campos numéricos para las fichas en mesa y en mano, y switches para Cerró y Tomó el muerto. Muestra el resultado de la mano en fichas y en cuánto quedaría el Participante. Los valores están en `docs/SPEC.md`.
 
 ## Ícono
 
@@ -53,7 +53,7 @@ Agregar un Juego nuevo significa definir su mundo con estos mismos cuatro elemen
 - Objetivos táctiles de al menos 44 pt. El +1 y la acción principal ocupan todo el ancho del pulgar en la parte baja de la pantalla.
 - Las acciones destructivas (Terminar partida) quedan separadas de las de sumar.
 - Las fuentes de display (Shrikhand, Bevan, Abril Fatface y Alfa Slab One) van incluidas en la app y solo se usan en momentos de display. Todo el texto de UI usa SF con Dynamic Type.
-- Los valores de puntaje que muestra el prototipo son provisorios hasta que se cierren las reglas de cada Juego.
+- Los valores de puntaje del prototipo no son la referencia: las reglas de cada Juego están en `docs/SPEC.md`.
 
 ## Accesibilidad y uso en la mesa
 

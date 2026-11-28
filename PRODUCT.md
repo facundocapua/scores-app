@@ -39,7 +39,7 @@ Reemplazar el papel y la birome (o los porotos y los fósforos) para llevar la c
 - El modelo tiene que permitir agregar más Juegos después.
 - Distribución: TestFlight para el MVP y App Store más adelante.
 - Fuera de alcance: estadísticas, sincronización con iCloud, iPad, Apple Watch y otros Juegos.
-- Las reglas de los tres Juegos todavía no están cerradas: tienen sus propios tickets en el mapa.
+- Las reglas de los tres Juegos, el modelo y las pantallas están cerrados en `docs/SPEC.md`.
 
 ## Brand Commitments
 
