@@ -7,7 +7,7 @@ enum GameCatalog {
         switch kind {
         case .truco: Truco.self
         case .generala: Generala.self
-        case .burako: nil
+        case .burako: Burako.self
         }
     }
 }

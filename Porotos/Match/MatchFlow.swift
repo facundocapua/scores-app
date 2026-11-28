@@ -87,8 +87,30 @@ struct MatchFlowView: View {
                 onDiscard: { onDiscard(match) }
             )
             .id(match.id)
+        case .newMatch(.burako):
+            BurakoNewMatchView(
+                setup: (try? RememberedSetup.last(Burako.self, in: context))
+                    ?? MatchSetup(variant: Burako.standardVariant, participants: Burako.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .rematchSetup(let finished) where finished.kind == .burako:
+            BurakoNewMatchView(
+                setup: (try? finished.rematchSetup(Burako.self))
+                    ?? MatchSetup(variant: Burako.standardVariant, participants: Burako.initialParticipants),
+                onStart: { stage = .playing($0) },
+                onCancel: onClose
+            )
+        case .playing(let match) where match.kind == .burako:
+            BurakoMatchView(
+                match: match,
+                onRematch: { rematch(match, Burako.self) },
+                onHome: onClose,
+                onDiscard: { onDiscard(match) }
+            )
+            .id(match.id)
         default:
-            // Burako arrives in its own slice: its card is disabled for now.
+            // Every Game is registered, so this is unreachable.
             Color.clear.onAppear(perform: onClose)
         }
     }
