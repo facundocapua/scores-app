@@ -1,0 +1,8 @@
+# Generado por XcodeGen a partir de project.yml
+*.xcodeproj
+Porotos/App/Info.plist
+
+xcuserdata/
+DerivedData/
+build/
+.DS_Store

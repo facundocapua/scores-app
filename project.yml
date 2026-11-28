@@ -1,0 +1,60 @@
+name: Porotos
+options:
+  bundleIdPrefix: com.facundocapua
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: es
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  Porotos:
+    type: application
+    platform: iOS
+    sources:
+      - path: Porotos
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.facundocapua.porotos
+        PRODUCT_NAME: Porotos
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Porotos
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_UIRequiresFullScreen: YES
+        INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: NO
+    info:
+      path: Porotos/App/Info.plist
+      properties:
+        CFBundleDevelopmentRegion: es
+        UIAppFonts:
+          - Shrikhand-Regular.ttf
+          - Bevan-Regular.ttf
+          - AbrilFatface-Regular.ttf
+          - AlfaSlabOne-Regular.ttf
+  PorotosTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: PorotosTests
+    dependencies:
+      - target: Porotos
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.facundocapua.porotos.tests
+schemes:
+  Porotos:
+    build:
+      targets:
+        Porotos: all
+        PorotosTests: [test]
+    test:
+      targets:
+        - PorotosTests
